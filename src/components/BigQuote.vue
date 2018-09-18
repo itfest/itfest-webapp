@@ -1,7 +1,7 @@
 <template>
-	<section class="annotation">
-		<span class="annotation__l-q"></span>
-		<span class="annotation__r-q"></span>
+	<section class="big-quote">
+		<span class="big-quote__l-q"></span>
+		<span class="big-quote__r-q"></span>
 		<p>{{ text }}</p>
 	</section>
 </template>
@@ -18,9 +18,9 @@
 <style lang="scss">
 	@import "@/assets/scss/_vars.scss";
 
-	$annotation-border: 4px solid $c-dark;
+	$big-quote-border: 4px solid $c-dark;
 
-	.annotation {
+	.big-quote {
 		position: relative;
 		padding: 30px 40px 15px;
 		font-size: 24px;
@@ -33,8 +33,8 @@
 			top: 0;
 			bottom: 0;
 			width: 10px;
-			border-top: $annotation-border;
-			border-bottom: $annotation-border;
+			border-top: $big-quote-border;
+			border-bottom: $big-quote-border;
 
 			&:before {
 				content: '';
@@ -48,7 +48,7 @@
 		}
 
 		&__l-q {
-			border-left: $annotation-border;
+			border-left: $big-quote-border;
 			left: 0;
 
 			&:before {
@@ -57,7 +57,7 @@
 		}
 
 		&__r-q {
-			border-right: $annotation-border;
+			border-right: $big-quote-border;
 			right: 0;
 
 			&:before {

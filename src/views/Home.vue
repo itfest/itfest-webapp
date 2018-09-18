@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Annotation text="Minus officia fuga suscipit inventore, maxime porro consectetur ex et, adipisci quis, sequi similique quae quam soluta impedit."/>
+    <BigQuote text="Minus officia fuga suscipit inventore, maxime porro consectetur ex et, adipisci quis, sequi similique quae quam soluta impedit."/>
     <BigLink linkUri="/register" linkText="Перейти к регистрации" />
     <HelloWorld msg="Dummy text"/>
   </div>
@@ -8,14 +8,15 @@
 
 <script lang="ts">
 	import { Component, Vue } from 'vue-property-decorator';
-	import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-	import Annotation from '@/components/Annotation.vue'; // @ is an alias to /src
-	import BigLink from '@/components/BigLink.vue'; // @ is an alias to /src
+	import HelloWorld from '@/components/HelloWorld.vue';
+	import BigQuote from '@/components/BigQuote.vue';
+	import BigLink from '@/components/BigLink.vue';
+	import {AnnotationBlock, AnnotationObject} from '@/components/Annotation/AnnotationBlock.vue';
 
 	@Component({
 		components: {
 			HelloWorld,
-			Annotation,
+			BigQuote,
 			BigLink,
 		},
 	})
