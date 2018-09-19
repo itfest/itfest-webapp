@@ -1,4 +1,4 @@
-export default class AnnotationObject {
+export default class ActivityObject {
 	constructor(
 		public heading: string,
 		public text: string,
