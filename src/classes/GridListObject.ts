@@ -1,4 +1,4 @@
-export default class ActivityObject {
+export default class GridListObject {
 	constructor(
 		public heading: string,
 		public text: string | null,

@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <Annotation text="Minus officia fuga suscipit inventore, maxime porro consectetur ex et, adipisci quis, sequi similique quae quam soluta impedit."/>
-    <ActivityBlock :activityItems="activities" />
+    <GridListBlock :activityItems="activities" />
     <BigLink linkUri="/register" linkText="Перейти к регистрации" />
+    <GridListBlock :informationItems="information" />
   </div>
 </template>
 
@@ -11,19 +12,20 @@
 	import HelloWorld from '@/components/HelloWorld.vue';
 	import Annotation from '@/components/Annotation.vue';
 	import BigLink from '@/components/BigLink.vue';
-	import ActivityBlock from '@/components/ActivityBlock.vue';
-	import ActivityObject from '@/classes/ActivityObject.ts';
+	import GridListBlock from '@/components/GridListBlock.vue';
+	import GridListObject from '@/classes/GridListObject.ts';
 
 	@Component({
 		components: {
 			HelloWorld,
 			Annotation,
 			BigLink,
-			ActivityBlock,
+			GridListBlock,
 		},
 	})
 	export default class Home extends Vue {
-		public activities: ActivityObject[];
+		public activities: GridListObject[];
+		public information: GridListObject[];
 		private dummyText: string[];
 
 		constructor() {
@@ -44,11 +46,18 @@
 			`];
 
 			this.activities = [
-				new ActivityObject('Конкурс', this.dummyText[0], 'Подробнее', '/'),
-				new ActivityObject('Олимпиада', null, null, null),
-				new ActivityObject('Конкурс по робототехнике', null, null, null),
-				new ActivityObject('Мастер-классы', this.dummyText[1], 'Подробнее', '/'),
-				new ActivityObject('День карьеры', this.dummyText[2], 'Подробнее', '/'),
+				new GridListObject('Конкурс', this.dummyText[0], 'Подробнее', '/'),
+				new GridListObject('Олимпиада', null, null, null),
+				new GridListObject('Конкурс по робототехнике', null, null, null),
+				new GridListObject('Мастер-классы', this.dummyText[1], 'Подробнее', '/'),
+				new GridListObject('День карьеры', this.dummyText[2], 'Подробнее', '/'),
+			];
+
+			this.information = [
+				new GridListObject('Конкурс', this.dummyText[0], 'Подробнее', '/'),
+				new GridListObject('Конкурс по робототехнике', null, null, null),
+				new GridListObject('Мастер-классы', this.dummyText[1], 'Подробнее', '/'),
+				new GridListObject('День карьеры', this.dummyText[2], 'Подробнее', '/'),
 			];
 		}
 	}

@@ -1,30 +1,47 @@
 <template>
-	<section class="row activities">
-		<ActivityElement v-for="item in activityItems" :key="item.heading" :activityItem="item" />
+	<section class="row row--with-paddings"
+	:class="{activities: !!activityItems, information: !!informationItems}">
+		<GridActivityElement
+		v-if="!!activityItems"
+		v-for="item in activityItems"
+		:key="item.heading"
+		:activityItem="item" />
+
+		<GridInformationElement
+		v-if="!!informationItems"
+		v-for="item in informationItems"
+		:key="item.heading"
+		:informationItem="item" />		
 	</section>
 </template>
 
 <script lang="ts">
 	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import ActivityElement from './ActivityElement.vue';
-	import ActivityObject from '@/classes/ActivityObject.ts';
+	import GridActivityElement from './GridActivityElement.vue';
+	import GridInformationElement from './GridInformationElement.vue';
+	import GridListObject from '@/classes/GridListObject.ts';
 
 	@Component({
 		components: {
-			ActivityElement,
+			GridActivityElement,
+			GridInformationElement,
 		},
 	})
-	export default class ActivityBlock extends Vue {
-		@Prop() private activityItems!: ActivityObject[];
+	export default class GridListBlock extends Vue {
+		@Prop() private activityItems?: GridListObject[];
+		@Prop() private informationItems?: GridListObject[];
 	}
 
 </script>
 
 <style lang="scss">
 	@import "@/assets/scss/_vars.scss";
+
+	.row--with-paddings {
+		padding: 15px;
+	}
 	
 	.activities {
-		padding: 15px;
 		display: grid;
 		position: relative;
 		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -112,4 +129,28 @@
 			}
 		}
 	}
+
+	.information {
+		display: grid;
+		position: relative;
+		grid-auto-rows: minmax(80px, auto);
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 20px;
+
+		&__item {
+			display: grid;
+			justify-content: space-between;
+			grid-template-rows: auto 1fr auto;
+
+			> h3 {
+				align-self: start;
+			}
+
+			> a {
+				align-self: end;
+				justify-self: start;
+			}
+		}
+	}
+
 </style>

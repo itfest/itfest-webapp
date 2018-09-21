@@ -5,18 +5,20 @@
 		<span>
 			<h2 >{{ activityItem.heading }}</h2>
 			<p v-if=!isWithoutText()>{{ activityItem.text }}</p>
-			<a v-if=!isWithoutText() :href=activityItem.linkUri>{{ activityItem.linkText }}</a>
+			<a v-if=!isWithoutText() :href=activityItem.linkUri>
+				{{ activityItem.linkText }}
+			</a>
 		</span>
 	</div>
 </template>
 
 <script lang="ts">
 	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import ActivityObject from '@/classes/ActivityObject.ts';
+	import GridListObject from '@/classes/GridListObject.ts';
 
 	@Component
-	export default class ActivityElement extends Vue {
-		@Prop() private activityItem!: ActivityObject;
+	export default class GridActivityElement extends Vue {
+		@Prop() private activityItem!: GridListObject;
 
 		public isWithoutText() {
 			return this.activityItem.text == null &&
