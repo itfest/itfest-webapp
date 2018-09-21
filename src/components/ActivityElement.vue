@@ -1,9 +1,11 @@
 <template>
-	<div class="activities__item">
+	<div class="activities__item"
+	:class="{'activities__item--no-text': isWithoutText()}"
+	>
 		<span>
-			<h2>Конкурс</h2>
-				<p>Assumenda sunt, labore officiis rem iste, tenetur magni minus consectetur suscipit, nam, eum adipisci veniam laudantium recusandae culpa repellat repellendus reprehenderit pariatur!</p>
-				<a href="#">Подробнее</a>
+			<h2 >{{ activityItem.heading }}</h2>
+			<p v-if=!isWithoutText()>{{ activityItem.text }}</p>
+			<a v-if=!isWithoutText() :href=activityItem.linkUri>{{ activityItem.linkText }}</a>
 		</span>
 	</div>
 </template>
@@ -15,6 +17,11 @@
 	@Component
 	export default class ActivityElement extends Vue {
 		@Prop() private activityItem!: ActivityObject;
+
+		public isWithoutText() {
+			return this.activityItem.text == null &&
+			(this.activityItem.linkText == null || this.activityItem.linkUri == null);
+		}
 	}
 
 </script>

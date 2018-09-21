@@ -1,10 +1,6 @@
 <template>
 	<section class="row activities">
-		<ActivityElement />
-		<ActivityElement />
-		<ActivityElement />
-		<ActivityElement />
-		<ActivityElement />
+		<ActivityElement v-for="item in activityItems" :key="item.heading" :activityItem="item" />
 	</section>
 </template>
 
@@ -42,9 +38,10 @@
 			padding: 25px 12px;
 			color: $c-white;
 			font-size: 1.2rem;
-			background-image: url(/img/activities-bg.jpg);			
+			background-image: url(/img/activities-bg.jpg);
 			background-position: 50%;
 			background-size: cover;
+			background-attachment: fixed;
 
 			a {
 				color: $c-white;

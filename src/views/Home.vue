@@ -1,9 +1,8 @@
 <template>
   <div class="home">
     <Annotation text="Minus officia fuga suscipit inventore, maxime porro consectetur ex et, adipisci quis, sequi similique quae quam soluta impedit."/>
-    <ActivityBlock />
+    <ActivityBlock :activityItems="activities" />
     <BigLink linkUri="/register" linkText="Перейти к регистрации" />
-    <HelloWorld msg="Dummy text"/>
   </div>
 </template>
 
@@ -23,11 +22,40 @@
 			ActivityBlock,
 		},
 	})
-	export default class Home extends Vue {}
+	export default class Home extends Vue {
+		public activities: ActivityObject[];
+		private dummyText: string[];
+
+		constructor() {
+			super();
+			this.dummyText = [
+			`
+			Assumenda sunt, labore officiis rem iste, tenetur magni minus
+			consectetur suscipit, nam, eum adipisci veniam laudantium
+			recusandae culpa repellat repellendus reprehenderit pariatur!
+			`,
+			`
+			Assumenda sunt, labore officiis rem iste, tenetur magni minus
+			consectetur suscipit!
+			`,
+			`
+			Quidem quisquam animi, perspiciatis sunt provident voluptas sit,
+			earum velit eos unde natus odit vitae dolorum.
+			`];
+
+			this.activities = [
+				new ActivityObject('Конкурс', this.dummyText[0], 'Подробнее', '/'),
+				new ActivityObject('Олимпиада', null, null, null),
+				new ActivityObject('Конкурс по робототехнике', null, null, null),
+				new ActivityObject('Мастер-классы', this.dummyText[1], 'Подробнее', '/'),
+				new ActivityObject('День карьеры', this.dummyText[2], 'Подробнее', '/'),
+			];
+		}
+	}
 </script>
 
 <style lang="scss">
 	.main-block__content section {
-		margin-top: 30px;
+		// margin-top: 10px;
 	}
 </style>
