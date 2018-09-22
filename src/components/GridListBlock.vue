@@ -149,17 +149,25 @@
 	.information {
 		display: grid;
 		position: relative;
+		padding-top: 20px;
+		padding-bottom: 20px;
 		grid-auto-rows: minmax(80px, auto);
 		grid-template-columns: repeat(2, 1fr);
 		grid-gap: 20px;
 
 		&__item {
 			display: grid;
+			padding: 20px 0;
 			justify-content: space-between;
 			grid-template-rows: auto 1fr auto;
 
-			> h3 {
+			> h2 {
 				align-self: start;
+				padding-bottom: 10px;
+			}
+
+			> p {
+				padding: 10px 0;
 			}
 
 			> a {
@@ -171,7 +179,7 @@
 
 	.partners {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(110px,1fr));
+		grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
 		grid-auto-rows: minmax(80px, auto);
 		grid-gap: 30px;
 		a {
