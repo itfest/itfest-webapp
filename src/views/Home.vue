@@ -4,6 +4,7 @@
     <GridListBlock :activityItems="activities" />
     <BigLink linkUri="/register" linkText="Перейти к регистрации" />
     <GridListBlock :informationItems="information" />
+    <h3 class="heading heading--centered">Партнеры фестиваля</h3>
     <GridListBlock :partners="partners" />
   </div>
 </template>

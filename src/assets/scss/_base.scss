@@ -16,3 +16,11 @@ h1 {
 a {
 	color: $c-accent;
 }
+
+.heading {
+	padding: 20px 0 5px;
+
+	&--centered {
+		text-align: center;
+	}
+}
