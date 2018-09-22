@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Component, Vue } from 'vue-property-decorator';
-	import Header from '@/components/Header.vue'; // @ is an alias to /src
+	import Header from '@/components/Header.vue';
+	import Footer from '@/components/Footer.vue';
 	import axios from 'axios';
 
 	@Component({
 		components: {
 			Header,
+			Footer,
 		},
 	})
 	export default class App extends Vue {
@@ -55,6 +57,7 @@
 			<main class="main-block offset-lg-4 col-lg-8">
 				<Header class="row" msg="15-17 ДЕКАБРЯ 2018г."/>
 				<router-view class="main-block__content" />
+				<Footer class="row main-block__footer" />
 			</main>
 		</div>
 	</div>
@@ -155,6 +158,10 @@
 		&__content {
 			max-width: 920px;
 			padding: 30px 5px 40px;
+		}
+
+		&__footer {
+			background-color: $c-dark-bg;
 		}
 	}
 </style>

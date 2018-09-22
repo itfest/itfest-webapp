@@ -54,7 +54,7 @@
 	@import "@/assets/scss/_vars.scss";
 
 	.row--with-paddings {
-		padding: 15px;
+		padding: $gutter;
 	}
 	
 	.activities {
@@ -62,7 +62,7 @@
 		position: relative;
 		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 		grid-auto-rows: minmax(240px, auto);
-		grid-gap: 15px;
+		grid-gap: $gutter;
 
 		&__item {
 			display: grid;
@@ -82,7 +82,7 @@
 			}
 
 			p {
-				padding-top: 15px;
+				padding-top: $gutter;
 			}
 
 			span {
@@ -93,7 +93,7 @@
 
 			&:not(&--no-text) h2 {
 				position: relative;
-				padding-bottom: 15px;
+				padding-bottom: $gutter;
 				margin: 0;
 				&:after {
 					content: "";
@@ -181,7 +181,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
 		grid-auto-rows: minmax(80px, auto);
-		grid-gap: 30px;
+		grid-gap: $gutter;
 		a {
 			background-size: contain;
 			background-repeat: no-repeat;
