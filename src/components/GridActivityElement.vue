@@ -1,6 +1,6 @@
 <template>
 	<div class="activities__item"
-	:class="{'activities__item--no-text': isWithoutText()}"
+		:class="{'activities__item--no-text': isWithoutText()}"
 	>
 		<span>
 			<h2 >{{ activityItem.heading }}</h2>
@@ -25,10 +25,4 @@
 			(this.activityItem.linkText == null || this.activityItem.linkUri == null);
 		}
 	}
-
 </script>
-
-<style lang="scss">
-	@import "@/assets/scss/_vars.scss";
-	
-</style>

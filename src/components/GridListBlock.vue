@@ -1,17 +1,30 @@
 <template>
 	<section class="row row--with-paddings"
-	:class="{activities: !!activityItems, information: !!informationItems}">
+	:class="{
+		'activities': !!activityItems,
+		'information': !!informationItems,
+		'partners': !!partners,
+	}">
 		<GridActivityElement
-		v-if="!!activityItems"
-		v-for="item in activityItems"
-		:key="item.heading"
-		:activityItem="item" />
+			v-if="!!activityItems"
+			v-for="item in activityItems"
+			:key="item.heading"
+			:activityItem="item"
+		/>
 
 		<GridInformationElement
-		v-if="!!informationItems"
-		v-for="item in informationItems"
-		:key="item.heading"
-		:informationItem="item" />		
+			v-if="!!informationItems"
+			v-for="item in informationItems"
+			:key="item.heading"
+			:informationItem="item"
+		/>
+
+		<PartnersElement
+			v-if="!!partners"
+			v-for="partner in partners"
+			:key="partner.name"
+			:partner="partner"
+		/>
 	</section>
 </template>
 
@@ -19,19 +32,22 @@
 	import { Component, Prop, Vue } from 'vue-property-decorator';
 	import GridActivityElement from './GridActivityElement.vue';
 	import GridInformationElement from './GridInformationElement.vue';
+	import PartnersElement from './PartnersElement.vue';
 	import GridListObject from '@/classes/GridListObject.ts';
+	import Partner from '@/classes/Partner.ts';
 
 	@Component({
 		components: {
 			GridActivityElement,
 			GridInformationElement,
+			PartnersElement,
 		},
 	})
 	export default class GridListBlock extends Vue {
 		@Prop() private activityItems?: GridListObject[];
 		@Prop() private informationItems?: GridListObject[];
+		@Prop() private partners?: Partner[];
 	}
-
 </script>
 
 <style lang="scss">
@@ -150,6 +166,18 @@
 				align-self: end;
 				justify-self: start;
 			}
+		}
+	}
+
+	.partners {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(110px,1fr));
+		grid-auto-rows: minmax(80px, auto);
+		grid-gap: 30px;
+		a {
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: 50%;
 		}
 	}
 

@@ -4,6 +4,7 @@
     <GridListBlock :activityItems="activities" />
     <BigLink linkUri="/register" linkText="Перейти к регистрации" />
     <GridListBlock :informationItems="information" />
+    <GridListBlock :partners="partners" />
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 	import BigLink from '@/components/BigLink.vue';
 	import GridListBlock from '@/components/GridListBlock.vue';
 	import GridListObject from '@/classes/GridListObject.ts';
+	import Partner from '@/classes/Partner.ts';
 
 	@Component({
 		components: {
@@ -26,6 +28,7 @@
 	export default class Home extends Vue {
 		public activities: GridListObject[];
 		public information: GridListObject[];
+		public partners: Partner[];
 		private dummyText: string[];
 
 		constructor() {
@@ -58,6 +61,17 @@
 				new GridListObject('Конкурс по робототехнике', null, null, null),
 				new GridListObject('Мастер-классы', this.dummyText[1], 'Подробнее', '/'),
 				new GridListObject('День карьеры', this.dummyText[2], 'Подробнее', '/'),
+			];
+
+			this.partners = [
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
 			];
 		}
 	}

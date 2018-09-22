@@ -16,10 +16,4 @@
 	export default class GridInformationElement extends Vue {
 		@Prop() private informationItem!: GridListObject;
 	}
-
 </script>
-
-<style lang="scss">
-	@import "@/assets/scss/_vars.scss";
-	
-</style>
