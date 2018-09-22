@@ -179,7 +179,7 @@
 
 	.partners {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
+		grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
 		grid-auto-rows: minmax(80px, auto);
 		grid-gap: 30px;
 		a {

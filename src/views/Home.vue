@@ -87,21 +87,21 @@
 			];
 
 			this.information = [
-				new GridListObject('Конкурс', this.dummyText[3], 'Подробнее', '/'),
-				new GridListObject('Конкурс по робототехнике', this.dummyText[4], null, null),
-				new GridListObject('Мастер-классы', this.dummyText[5], 'Подробнее', '/'),
-				new GridListObject('День карьеры', this.dummyText[6], 'Подробнее', '/'),
+				new GridListObject('Положение', this.dummyText[3], 'Подробнее', '/'),
+				new GridListObject('Ipsumo Dolorem', this.dummyText[4], null, null),
+				new GridListObject('Nihil, incidunt', this.dummyText[5], 'Подробнее', '/'),
+				new GridListObject('Saepe, omnis', this.dummyText[6], 'Подробнее', '/'),
 			];
 
 			this.partners = [
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
-				new Partner('Parntner Name', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 1', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 2', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 3', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 4', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 5', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 6', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 7', '/', 'https://via.placeholder.com/300x150'),
+				new Partner('Parntner Name 8', '/', 'https://via.placeholder.com/300x150'),
 			];
 		}
 	}
