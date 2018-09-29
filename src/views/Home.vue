@@ -107,6 +107,10 @@
 			];
 		}
 
+		public mounted() {
+			this.$store.dispatch('getAnnotationElementsFromApi');
+		}
+
 		get getAnnotationElements() {
 			return this.$store.getters.getAnnotationElements;
 		}

@@ -16,7 +16,7 @@ export default new Vuex.Store({
 	},
 	getters: {
 		getAnnotationElements(state: any) {
-			return state.annotationElements.data.map((e: any) => {
+			return state.annotationElements.map((e: any) => {
 				return new GridListObject( e.id, e.title, e.content, 'Подробнее', e.link, e.created_at, e.updated_at);
 			});
 		},
@@ -31,7 +31,9 @@ export default new Vuex.Store({
 			axios
 				.get(`${urlBase}/annotations`)
 				.then((resp: any) => {
-					commit('set', { type: 'annotationElements', items: resp.data });
+					commit('set', { type: 'annotationElements', items: resp.data.data });
+				}, () => {
+					commit('set', { type: 'annotationElements', items: [] });
 				});
 		},
 	},
