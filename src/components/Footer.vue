@@ -19,13 +19,14 @@
 	import GridListObject from '@/classes/GridListObject.ts';
 
 	@Component
-	export default class GridInformationElement extends Vue {
+	export default class Footer extends Vue {
 		@Prop() private informationItem!: GridListObject;
 	}
 </script>
 
 <style lang="scss">
 	@import "@/assets/scss/_vars.scss";
+
 	.global-footer {
 		padding: 20px 15px 20px;
 		font-size: 1rem;

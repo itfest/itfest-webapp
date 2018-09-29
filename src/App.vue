@@ -24,15 +24,8 @@
 			this.scrollingPosition = window.pageYOffset || document.documentElement.scrollTop;
 		}
 
-		public runShit() {
-			axios
-				.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-				.then((resp: any) => { this.someVarible = resp.data.time.updated; });
-		}
-
 		public mounted() {
 			window.addEventListener('scroll', this.handleScroll);
-			this.runShit();
 		}
 	}
 </script>
@@ -83,6 +76,7 @@
 			font-size: 0.85rem;
 			width: 100%;
 			background-image: none;
+
 			&:before {
 				content: "";
 				background-color: initial;
@@ -162,6 +156,10 @@
 
 		&__footer {
 			background-color: $c-dark-bg;
+			
+			> div {
+				max-width: 920px;
+			}
 		}
 	}
 </style>
