@@ -33,7 +33,7 @@
 <template>
 	<div id="app" class="container-fluid">
 		<div class="row">
-			<aside class="sidebar col-lg-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
+			<aside class="sidebar col-lg-4 col-xl-3" :class="{'sidebar--scrolled': scrollingPosition > 292}">
 				<div class="sidebar__container">
 					<Header msg="15-17 ДЕКАБРЯ 2018г."/>
 					<div class="menu-container col-12">
@@ -47,7 +47,7 @@
 				</div>
 			</aside>
 
-			<main class="main-block offset-lg-4 col-lg-8">
+			<main class="main-block offset-lg-4 offset-xl-3 col-lg-8 col-xl-9">
 				<Header class="row" msg="15-17 ДЕКАБРЯ 2018г."/>
 				<router-view class="main-block__content" />
 				<Footer class="row main-block__footer" />
@@ -87,6 +87,8 @@
 			}
 
 			&__frame {
+				padding: 10px 50px 30px;
+
 				&:before {
 					content: "";
 					position: absolute;
