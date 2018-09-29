@@ -8,21 +8,21 @@
 		<GridActivityElement
 			v-if="!!activityItems"
 			v-for="item in activityItems"
-			:key="item.heading"
+			:key="item.id"
 			:activityItem="item"
 		/>
 
 		<GridInformationElement
 			v-if="!!informationItems"
 			v-for="item in informationItems"
-			:key="item.heading"
+			:key="item.id"
 			:informationItem="item"
 		/>
 
 		<PartnersElement
 			v-if="!!partners"
 			v-for="partner in partners"
-			:key="partner.name"
+			:key="partner.id"
 			:partner="partner"
 		/>
 	</section>
