@@ -1,5 +1,5 @@
 <template>
-	<footer class="global-footer">
+	<footer class="global-footer row">
 		<div class="global-footer__content">
 			<div>
 				&copy; ВШ&nbsp;ИТиАС<br />
@@ -28,7 +28,7 @@
 	@import "@/assets/scss/_vars.scss";
 
 	.global-footer {
-		padding: 20px 15px 20px;
+		padding: 20px $gutter $gutter;
 		font-size: 1rem;
 		overflow: hidden;
 
@@ -49,7 +49,7 @@
 				top: 100%;
 				left: 50%;
 				width: 4px;
-				height: 20px;
+				height: $gutter *2;
 				margin: 4px 0 0 -2px;
 				background-color: $c-white-transparent-2;
 			}

@@ -33,7 +33,7 @@
 <template>
 	<div id="app" class="container-fluid">
 		<div class="row">
-			<aside class="sidebar col-lg-4 col-xl-3" :class="{'sidebar--scrolled': scrollingPosition > 292}">
+			<aside class="sidebar col-lg-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
 				<div class="sidebar__container">
 					<Header msg="15-17 ДЕКАБРЯ 2018г."/>
 					<div class="menu-container col-12">
@@ -47,7 +47,7 @@
 				</div>
 			</aside>
 
-			<main class="main-block offset-lg-4 offset-xl-3 col-lg-8 col-xl-9">
+			<main class="main-block offset-lg-4 col-lg-8 ">
 				<Header class="row" msg="15-17 ДЕКАБРЯ 2018г."/>
 				<router-view class="main-block__content" />
 				<Footer class="row main-block__footer" />
@@ -68,7 +68,7 @@
 		background-color: $c-dark;
 		height: 100vh;
 		position: fixed;
-		background-image: url(/img/background.jpg);
+		background-image: $i-main-bg;
 		
 				
 		.header {
@@ -152,15 +152,17 @@
 		overflow-x: hidden;
 
 		&__content {
-			max-width: 920px;
-			padding: 30px 5px 40px;
+			max-width: $max-width;
+			padding: $gutter * 2 $gutter 40px;
 		}
 
 		&__footer {
 			background-color: $c-dark-bg;
+
+			padding: $gutter * 2;
 			
 			> div {
-				max-width: 920px;
+				max-width: $max-width - $gutter * 2;
 			}
 		}
 	}

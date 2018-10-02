@@ -30,7 +30,7 @@ export default class Header extends Vue {
 		overflow: hidden;
 		background-size: cover;
 		background-position: center;
-		background-image: url(/img/background.jpg);
+		background-image: $i-main-bg;
 
 		&:before {
 			content: '';
@@ -46,7 +46,7 @@ export default class Header extends Vue {
 			width: 100%;
 			display: block;
 			padding: 60px $gutter;
-			max-width: 920px;
+			max-width: $max-width;
 		}
 
 		&__frame {

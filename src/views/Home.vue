@@ -119,6 +119,6 @@
 
 <style lang="scss">
 	.main-block__content section {
-		// margin-top: 10px;
+		margin-top: 10px;
 	}
 </style>

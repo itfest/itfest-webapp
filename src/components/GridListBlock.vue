@@ -71,7 +71,7 @@
 			padding: 25px 12px;
 			color: $c-white;
 			font-size: 1.2rem;
-			background-image: url(/img/activities-bg.jpg);
+			background-image: $i-grid-bg;
 			background-position: 50%;
 			background-size: cover;
 			background-attachment: fixed;
