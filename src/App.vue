@@ -24,8 +24,18 @@
 			this.scrollingPosition = window.pageYOffset || document.documentElement.scrollTop;
 		}
 
+		public handleResize() {
+			const mainContentBlock = document.querySelector('.main-block__content') as HTMLElement;
+			const headerBlock = document.querySelector('.main-block__header') as HTMLElement;
+			const footerBlock = document.querySelector('.main-block__footer') as HTMLElement;
+
+			mainContentBlock.style.minHeight = `calc(100vh - ${headerBlock.offsetHeight}px - ${footerBlock.offsetHeight}px)`;
+		}
+
 		public mounted() {
 			window.addEventListener('scroll', this.handleScroll);
+			window.addEventListener('resize', this.handleResize);
+			this.handleResize();
 		}
 	}
 </script>
@@ -39,16 +49,16 @@
 					<div class="menu-container col-12">
 						<nav id="nav" class="menu">
 							<router-link to="/">Главная</router-link>
+							<router-link to="/register">Регистрация</router-link>
 							<router-link to="/about">Положения</router-link>
 							<router-link to="/about">Контакты</router-link>
-							<router-link to="/about">Регистрация</router-link>
 						</nav>
 					</div>
 				</div>
 			</aside>
 
 			<main class="main-block offset-lg-4 col-lg-8 ">
-				<Header class="row" msg="15-17 ДЕКАБРЯ 2018г."/>
+				<Header class="row main-block__header" msg="15-17 ДЕКАБРЯ 2018г."/>
 				<router-view class="main-block__content" />
 				<Footer class="row main-block__footer" />
 			</main>
@@ -157,10 +167,8 @@
 		}
 
 		&__footer {
-			background-color: $c-dark-bg;
-
 			padding: $gutter * 2;
-			
+			background-color: $c-dark-bg;			
 			> div {
 				max-width: $max-width - $gutter * 2;
 			}
