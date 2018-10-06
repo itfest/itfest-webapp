@@ -13,11 +13,23 @@ export default new Vuex.Store({
 	state: {
 		isRegistrationAvailable: true,
 		annotationElements: [],
+		informationElements: [],
+		partners: [],
 	},
 	getters: {
 		getAnnotationElements(state: any) {
 			return state.annotationElements.map((e: any) => {
 				return new GridListObject( e.id, e.title, e.content, 'Подробнее', e.link, e.created_at, e.updated_at);
+			});
+		},
+		getInformationElements(state: any) {
+			return state.informationElements.map((e: any) => {
+				return new GridListObject( e.id, e.title, e.content, 'Подробнее', e.link, e.created_at, e.updated_at);
+			});
+		},
+		getPartners(state: any) {
+			return state.partners.map((e: any) => {
+				return new Partner( e.id, e.name, e.link, `${urlBase}${e.logo.url}`, e.created_at, e.updated_at);
 			});
 		},
 	},
@@ -31,9 +43,27 @@ export default new Vuex.Store({
 			axios
 				.get(`${urlBase}/annotations`)
 				.then((resp: any) => {
-					commit('set', { type: 'annotationElements', items: resp.data.data });
+					commit('set', { type: 'annotationElements', items: resp.data });
 				}, () => {
 					commit('set', { type: 'annotationElements', items: [] });
+				});
+		},
+		getInformationElementsFromApi({commit}) {
+			axios
+				.get(`${urlBase}/information_elements`)
+				.then((resp: any) => {
+					commit('set', { type: 'informationElements', items: resp.data });
+				}, () => {
+					commit('set', { type: 'informationElements', items: [] });
+				});
+		},
+		getPartnersFromApi({commit}) {
+			axios
+				.get(`${urlBase}/partners`)
+				.then((resp: any) => {
+					commit('set', { type: 'partners', items: resp.data });
+				}, () => {
+					commit('set', { type: 'partners', items: [] });
 				});
 		},
 	},

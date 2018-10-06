@@ -1,8 +1,8 @@
 <template>
 	<a
-		title="123"
+		:title="partner.name"
 		:style="`background-image: url(${partner.imgUrl});`"
-		href="#"
+		:href="partner.linkUri"
 		rel="noopener noreferrer nofollow" target="_blank"
 	></a>
 </template>
