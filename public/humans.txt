@@ -1,0 +1,15 @@
+/* TEAM */
+
+	Front-end & Back-end developer: Sergey Luschik
+	Github: https://github.com/frostbolt
+
+	Backend developer: Nick Potashev
+	Github: https://github.com/dzuba29
+
+/* SITE */
+
+	Language: Russian
+	Doctype: HTML5
+	IDE: Sublime Text 3
+	API-server: Ruby on Rails
+
