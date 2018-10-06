@@ -15,6 +15,10 @@ export default new Vuex.Store({
 		annotationElements: [],
 		informationElements: [],
 		partners: [],
+		dimentions: {
+			header: 293,
+			footer: 228,
+		},
 	},
 	getters: {
 		getAnnotationElements(state: any) {
@@ -32,10 +36,16 @@ export default new Vuex.Store({
 				return new Partner( e.id, e.name, e.link, `${urlBase}${e.logo.url}`, e.created_at, e.updated_at);
 			});
 		},
+		getDimentions(state: any) {
+			return state.dimentions;
+		},
 	},
 	mutations: {
 		set(state: any, {type, items}) {
 			state[type] = items;
+		},
+		setDimention(state: any, {element, value}) {
+			state.dimentions[element] = value;
 		},
 	},
 	actions: {

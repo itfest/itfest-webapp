@@ -16,6 +16,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class Header extends Vue {
 	@Prop() private msg!: string;
 
+	public mounted() {
+		if (this.$el.classList.contains('main-block__header')) {
+			this.$store.commit('setDimention', {element: 'header', value: this.$el.offsetHeight });
+		}
+	}
+
 }
 </script>
 

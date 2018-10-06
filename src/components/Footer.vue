@@ -21,6 +21,12 @@
 	@Component
 	export default class Footer extends Vue {
 		@Prop() private informationItem!: GridListObject;
+
+		public mounted() {
+			if (this.$el.classList.contains('main-block__footer')) {
+				this.$store.commit('setDimention', {element: 'footer', value: this.$el.offsetHeight });
+			}
+		}
 	}
 </script>
 
