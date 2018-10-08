@@ -1,7 +1,7 @@
 <template>
 	<div id="app" class="container-fluid">
 		<div class="row">
-			<aside class="sidebar col-lg-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
+			<aside class="sidebar col-1 col-lg-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
 				<div class="sidebar__container">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
@@ -15,7 +15,7 @@
 				</div>
 			</aside>
 
-			<main class="main-block offset-lg-4 col-lg-8 ">
+			<main class="main-block offset-1 col-11 offset-lg-4 col-lg-8">
 				<Header class="row main-block__header" :msg="getInfo.dates"/>
 				<router-view class="main-block__content"
 				:style="`min-height: calc(100vh - ${getDimentions.header}px - ${getDimentions.footer}px)`"/>

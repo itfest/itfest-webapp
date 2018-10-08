@@ -43,7 +43,7 @@
 			position: relative;
 			width: 100%;
 			padding: 20px 10px;
-			grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 			grid-auto-rows: minmax(120px, auto);
 			grid-gap: $gutter;
 			color: $c-white-transparent-6;

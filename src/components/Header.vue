@@ -93,4 +93,18 @@ export default class Header extends Vue {
 			}
 		}
 	}
+
+	@media (max-width: 992px) {
+		.header {
+			font-size: 1rem;
+
+			&__content {
+				padding: 30px 15px;
+			}
+
+			&__frame {
+		    	padding: 10px 20px 20px;
+			}
+		}
+	}
 </style>

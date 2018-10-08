@@ -1,5 +1,5 @@
 <template>
-	<div class="about">
+	<div class="register">
 		<h1>Регистрация</h1>
 		<p v-if="!getInfo.isRegistraionActive">
 			Регистрация временно недоступна.

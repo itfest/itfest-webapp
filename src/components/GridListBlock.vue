@@ -60,7 +60,7 @@
 	.activities {
 		display: grid;
 		position: relative;
-		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
 		grid-auto-rows: minmax(240px, auto);
 		grid-gap: $gutter;
 
@@ -152,7 +152,7 @@
 		padding-top: 20px;
 		padding-bottom: 20px;
 		grid-auto-rows: minmax(80px, auto);
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 		grid-gap: 20px;
 
 		&__item {
@@ -186,6 +186,12 @@
 			background-size: contain;
 			background-repeat: no-repeat;
 			background-position: 50%;
+		}
+	}
+
+	@media (max-width: 992px) {
+		.information {
+		    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		}
 	}
 
