@@ -12,3 +12,7 @@
 	Doctype: HTML5
 	IDE: Sublime Text 3
 	API-server: Ruby on Rails
+
+/* OTHER */
+
+	It is an opensourse project! Feel free to visit https://github.com/itfest
