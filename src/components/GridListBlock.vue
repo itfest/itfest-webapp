@@ -152,7 +152,7 @@
 		padding-top: 20px;
 		padding-bottom: 20px;
 		grid-auto-rows: minmax(80px, auto);
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		grid-template-columns: repeat(2, minmax(200px, 1fr));
 		grid-gap: 20px;
 
 		&__item {
@@ -190,8 +190,14 @@
 	}
 
 	@media (max-width: 992px) {
+	}
+
+	@media (max-width: 539px) {
 		.information {
 		    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		}
+		.activities__item:nth-child(1) {
+		    grid-row: initial;
 		}
 	}
 

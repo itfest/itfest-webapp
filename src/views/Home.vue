@@ -43,7 +43,7 @@
 		}
 
 		get getInformationElements() {
-			return this.$store.getters.getAnnotationElements;
+			return this.$store.getters.getInformationElements;
 		}
 
 		get getPartners() {
