@@ -12,4 +12,3 @@
 	Doctype: HTML5
 	IDE: Sublime Text 3
 	API-server: Ruby on Rails
-

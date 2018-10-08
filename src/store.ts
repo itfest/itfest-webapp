@@ -11,7 +11,12 @@ const urlBase = 'http://localhost:3000/';
 
 export default new Vuex.Store({
 	state: {
-		isRegistrationAvailable: true,
+		generalInfo: {
+			isApiResponding: true,
+			isRegistraionActive: true,
+			dates: '15-17 ДЕКАБРЯ 2018г.',
+			annotation: 'Пожалуйста, подождите',
+		},
 		annotationElements: [],
 		informationElements: [],
 		partners: [],
@@ -39,6 +44,9 @@ export default new Vuex.Store({
 		getDimentions(state: any) {
 			return state.dimentions;
 		},
+		getInfo(state: any) {
+			return state.generalInfo;
+		},
 	},
 	mutations: {
 		set(state: any, {type, items}) {
@@ -46,6 +54,17 @@ export default new Vuex.Store({
 		},
 		setDimention(state: any, {element, value}) {
 			state.dimentions[element] = value;
+		},
+		setGeneralInfo(state: any, value) {
+			if (value === false || value === null) {
+				state.generalInfo.isApiResponding = state.generalInfo.isRegistraionActive = false;
+				state.generalInfo.annotation = 'Ресурс недоступен, пожалуйста зайдите позднее или попробуйте обновить страницу';
+			} else {
+				state.generalInfo.isApiResponding = true;
+				state.generalInfo.isRegistraionActive = value.is_registration_active;
+				state.generalInfo.dates = value.dates;
+				state.generalInfo.annotation = value.annotation;
+			}
 		},
 	},
 	actions: {
@@ -56,6 +75,7 @@ export default new Vuex.Store({
 					commit('set', { type: 'annotationElements', items: resp.data });
 				}, () => {
 					commit('set', { type: 'annotationElements', items: [] });
+					commit('setGeneralInfo', false);
 				});
 		},
 		getInformationElementsFromApi({commit}) {
@@ -65,6 +85,7 @@ export default new Vuex.Store({
 					commit('set', { type: 'informationElements', items: resp.data });
 				}, () => {
 					commit('set', { type: 'informationElements', items: [] });
+					commit('setGeneralInfo', false);
 				});
 		},
 		getPartnersFromApi({commit}) {
@@ -74,6 +95,16 @@ export default new Vuex.Store({
 					commit('set', { type: 'partners', items: resp.data });
 				}, () => {
 					commit('set', { type: 'partners', items: [] });
+					commit('setGeneralInfo', false);
+				});
+		},
+		getInfoFromApi({commit}) {
+			axios
+				.get(`${urlBase}/general/info`)
+				.then((resp: any) => {
+					commit('setGeneralInfo', resp.data);
+				}, () => {
+					commit('setGeneralInfo', false);
 				});
 		},
 	},

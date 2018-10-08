@@ -3,11 +3,11 @@
 		<div class="row">
 			<aside class="sidebar col-lg-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
 				<div class="sidebar__container">
-					<Header msg="15-17 ДЕКАБРЯ 2018г."/>
+					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
 						<nav id="nav" class="menu">
 							<router-link to="/">Главная</router-link>
-							<router-link to="/register">Регистрация</router-link>
+							<router-link v-if="getInfo.isRegistraionActive" to="/register">Регистрация</router-link>
 							<router-link to="/about">Положения</router-link>
 							<router-link to="/about">Контакты</router-link>
 						</nav>
@@ -16,7 +16,7 @@
 			</aside>
 
 			<main class="main-block offset-lg-4 col-lg-8 ">
-				<Header class="row main-block__header" msg="15-17 ДЕКАБРЯ 2018г."/>
+				<Header class="row main-block__header" :msg="getInfo.dates"/>
 				<router-view class="main-block__content"
 				:style="`min-height: calc(100vh - ${getDimentions.header}px - ${getDimentions.footer}px)`"/>
 				<Footer class="row main-block__footer" />
@@ -53,10 +53,15 @@
 
 		public mounted() {
 			window.addEventListener('scroll', this.handleScroll);
+			this.$store.dispatch('getInfoFromApi');
 		}
 
 		get getDimentions() {
 			return this.$store.getters.getDimentions;
+		}
+
+		get getInfo() {
+			return this.$store.getters.getInfo;
 		}
 
 	}

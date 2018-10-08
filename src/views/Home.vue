@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <Annotation text="Minus officia fuga suscipit inventore, maxime porro consectetur ex et, adipisci quis, sequi similique quae quam soluta impedit."/>
+    <Annotation :text="getInfo.annotation"/>
     <GridListBlock :activityItems="getAnnotationElements" />
-    <BigLink linkUri="/register" linkText="Перейти к регистрации" />
-    <GridListBlock :informationItems="getInformationElements" />
-    <h3 class="heading heading--centered" :if="getPartners.length">Партнеры фестиваля</h3>
-    <GridListBlock :partners="getPartners" />
+    <BigLink v-if="getInfo.isRegistraionActive" linkUri="/register" linkText="Перейти к регистрации" />
+    <GridListBlock v-if="getInformationElements.length > 0" :informationItems="getInformationElements" />
+    <h3 class="heading heading--centered" v-if="getPartners.length > 0">Партнеры фестиваля</h3>
+    <GridListBlock v-if="getPartners.length > 0" :partners="getPartners" />
   </div>
 </template>
 
@@ -35,6 +35,7 @@
 			this.$store.dispatch('getAnnotationElementsFromApi');
 			this.$store.dispatch('getInformationElementsFromApi');
 			this.$store.dispatch('getPartnersFromApi');
+			this.$store.dispatch('getInfoFromApi');
 		}
 
 		get getAnnotationElements() {
@@ -47,6 +48,10 @@
 
 		get getPartners() {
 			return this.$store.getters.getPartners;
+		}
+
+		get getInfo() {
+			return this.$store.getters.getInfo;
 		}
 	}
 </script>
