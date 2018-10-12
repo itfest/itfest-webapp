@@ -60,7 +60,7 @@
 	.activities {
 		display: grid;
 		position: relative;
-		grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 		grid-auto-rows: minmax(240px, auto);
 		grid-gap: $gutter;
 
@@ -95,6 +95,7 @@
 				position: relative;
 				padding-bottom: $gutter;
 				margin: 0;
+				
 				&:after {
 					content: "";
 					display: block;
@@ -182,6 +183,7 @@
 		grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
 		grid-auto-rows: minmax(80px, auto);
 		grid-gap: $gutter;
+
 		a {
 			background-size: contain;
 			background-repeat: no-repeat;
@@ -189,13 +191,11 @@
 		}
 	}
 
-	@media (max-width: 992px) {
-	}
-
 	@media (max-width: 539px) {
 		.information {
 		    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		}
+
 		.activities__item:nth-child(1) {
 		    grid-row: initial;
 		}

@@ -7,7 +7,7 @@ import Partner from '@/classes/Partner.ts';
 
 Vue.use(Vuex);
 
-const urlBase = 'http://localhost:3000/';
+const urlBase = 'http://localhost:3000';
 
 export default new Vuex.Store({
 	state: {

@@ -1,7 +1,8 @@
 <template>
 	<div id="app" class="container-fluid">
 		<div class="row">
-			<aside class="sidebar col-1 col-lg-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
+			<aside class="sidebar col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
+				<button class="sidebar__burger" :click="menuToggleButton"></button>
 				<div class="sidebar__container">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
@@ -15,7 +16,7 @@
 				</div>
 			</aside>
 
-			<main class="main-block offset-1 col-11 offset-lg-4 col-lg-8">
+			<main class="main-block col-12 offset-md-4 col-md-8">
 				<Header class="row main-block__header" :msg="getInfo.dates"/>
 				<router-view class="main-block__content"
 				:style="`min-height: calc(100vh - ${getDimentions.header}px - ${getDimentions.footer}px)`"/>
@@ -39,16 +40,19 @@
 	})
 	export default class App extends Vue {
 		public scrollingPosition: number;
-		public someVarible: any;
+		public menuShown = false;
 
 		constructor() {
 			super();
 			this.scrollingPosition = 0;
-			this.someVarible = null;
 		}
 
 		public handleScroll() {
 			this.scrollingPosition = window.pageYOffset || document.documentElement.scrollTop;
+		}
+
+		public menuToggleButton() {
+			this.menuShown = !this.menuShown;
 		}
 
 		public mounted() {
@@ -60,10 +64,10 @@
 			return this.$store.getters.getDimentions;
 		}
 
+
 		get getInfo() {
 			return this.$store.getters.getInfo;
 		}
-
 	}
 </script>
 
@@ -80,13 +84,13 @@
 		height: 100vh;
 		position: fixed;
 		background-image: $i-main-bg;
-		
+		z-index: 3;		
 				
 		.header {
-			opacity: 0;
 			font-size: 0.85rem;
 			width: 100%;
 			background-image: none;
+			opacity: 0;
 
 			&:before {
 				content: "";
@@ -123,6 +127,11 @@
 						content: initial;
 					}
 				}
+
+				@media (max-width: $screen-lg - 1px) {
+					padding: 0 30px 20px;
+					font-size: 0.85em;
+				}				
 			}
 		}
 
@@ -131,16 +140,22 @@
 			text-align: center;
 			height: 100%; 
 			background-color: $c-dark;
-			transition: background-color .3s ease;     
+			transition: background-color .3s ease;
 		}
 
-		&--scrolled {
-			.sidebar__container { 
-				background-color: $c-dark-rgba-faded;
+		@media (min-width: $screen-md) {
+			&__burger {
+				display: none;
 			}
 
-			.header {
-				opacity: 1;				
+			&--scrolled {
+				.sidebar__container { 
+					background-color: $c-dark-rgba-faded;
+				}
+
+				.header {
+					opacity: 1;				
+				}
 			}
 		}
 	}
@@ -175,4 +190,5 @@
 			}
 		}
 	}
+
 </style>
