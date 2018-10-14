@@ -2,15 +2,15 @@
 	<div id="app" class="container-fluid">
 		<div class="row">
 			<aside class="sidebar row-xs col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
-				<button class="sidebar__burger" @click="menuToggleButton">МЕНЮ</button>
+				<button class="sidebar__burger" @click="menuToggle">МЕНЮ</button>
 				<div class="sidebar__container" :class="{'menu-shown': this.menuShown}">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
 						<nav id="nav" class="menu">
-							<router-link to="/">Главная</router-link>
-							<router-link v-if="getInfo.isRegistraionActive" to="/register">Регистрация</router-link>
-							<router-link to="/about">Положения</router-link>
-							<router-link to="/about">Контакты</router-link>
+							<router-link v-on:click.native="menuClose()" to="/">Главная</router-link>
+							<router-link v-on:click.native="menuClose()" v-if="getInfo.isRegistraionActive" to="/register">Регистрация</router-link>
+							<router-link v-on:click.native="menuClose()" to="/about">Положения</router-link>
+							<router-link v-on:click.native="menuClose()" to="/about">Контакты</router-link>
 						</nav>
 					</div>
 				</div>
@@ -30,7 +30,6 @@
 	import { Component, Vue } from 'vue-property-decorator';
 	import Header from '@/components/Header.vue';
 	import Footer from '@/components/Footer.vue';
-	import axios from 'axios';
 
 	@Component({
 		components: {
@@ -51,8 +50,12 @@
 			this.scrollingPosition = window.pageYOffset || document.documentElement.scrollTop;
 		}
 
-		public menuToggleButton() {
+		public menuToggle() {
 			this.menuShown = !this.menuShown;
+		}
+
+		public menuClose() {
+			this.menuShown = false;
 		}
 
 		public mounted() {
