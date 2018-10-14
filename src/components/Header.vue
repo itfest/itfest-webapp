@@ -25,7 +25,6 @@ export default class Header extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 	@import "@/assets/scss/_vars.scss";
 	.header {
@@ -36,7 +35,7 @@ export default class Header extends Vue {
 		overflow: hidden;
 		background-size: cover;
 		background-position: center;
-		background-image: $i-main-bg;
+		background-image: $i-header-bg;
 
 		&:before {
 			content: '';
