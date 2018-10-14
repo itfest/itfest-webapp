@@ -19,6 +19,7 @@ export default new Vuex.Store({
 		annotationElements: [],
 		informationElements: [],
 		partners: [],
+		pages: [],
 		dimentions: {
 			header: 293,
 			footer: 228,
@@ -45,6 +46,9 @@ export default new Vuex.Store({
 		},
 		getInfo(state: any) {
 			return state.generalInfo;
+		},
+		getPageList(state: any) {
+			return state.pages;
 		},
 	},
 	mutations: {
@@ -104,6 +108,17 @@ export default new Vuex.Store({
 					commit('setGeneralInfo', resp.data);
 				}, () => {
 					commit('setGeneralInfo', false);
+				});
+		},
+		getPageListFromApi({commit}) {
+			axios
+				.get(`${apiHost}/pages`)
+				.then((resp: any) => {
+					commit('set', { type: 'pages', items: resp.data });
+				}, () => {
+					commit('set', { type: 'pages', items: [] });
+
+					commit('set', false);
 				});
 		},
 	},

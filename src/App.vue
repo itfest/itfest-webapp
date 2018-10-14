@@ -9,8 +9,7 @@
 						<nav id="nav" class="menu">
 							<router-link v-on:click.native="menuClose()" to="/">Главная</router-link>
 							<router-link v-on:click.native="menuClose()" v-if="getInfo.isRegistraionActive" to="/register">Регистрация</router-link>
-							<router-link v-on:click.native="menuClose()" to="/about">Положения</router-link>
-							<router-link v-on:click.native="menuClose()" to="/about">Контакты</router-link>
+							<router-link v-for="page in getPageListFromApi" :key="page.id" v-on:click.native="menuClose()" :to="`page/${page.id}`">{{page.title}}</router-link>
 						</nav>
 					</div>
 				</div>
@@ -61,15 +60,19 @@
 		public mounted() {
 			window.addEventListener('scroll', this.handleScroll);
 			this.$store.dispatch('getInfoFromApi');
+			this.$store.dispatch('getPageListFromApi');
 		}
 
 		get getDimentions() {
 			return this.$store.getters.getDimentions;
 		}
 
-
 		get getInfo() {
 			return this.$store.getters.getInfo;
+		}
+
+		get getPageListFromApi() {
+			return this.$store.getters.getPageList;
 		}
 	}
 </script>
