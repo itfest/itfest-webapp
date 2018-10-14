@@ -1,9 +1,9 @@
 <template>
 	<div id="app" class="container-fluid">
 		<div class="row">
-			<aside class="sidebar col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
-				<button class="sidebar__burger" :click="menuToggleButton"></button>
-				<div class="sidebar__container">
+			<aside class="sidebar row-xs col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
+				<button class="sidebar__burger" @click="menuToggleButton">МЕНЮ</button>
+				<div class="sidebar__container" :class="{'menu-shown': this.menuShown}">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
 						<nav id="nav" class="menu">
@@ -16,7 +16,7 @@
 				</div>
 			</aside>
 
-			<main class="main-block col-12 offset-md-4 col-md-8">
+			<main class="main-block row-xs col-12 offset-md-4 col-md-8">
 				<Header class="row main-block__header" :msg="getInfo.dates"/>
 				<router-view class="main-block__content"
 				:style="`min-height: calc(100vh - ${getDimentions.header}px - ${getDimentions.footer}px)`"/>
@@ -75,22 +75,23 @@
 	@import "assets/scss/main";
 	
 	.sidebar {
-		position: relative;
+		position: fixed;
+		height: 100vh;
+		text-align: right;
+		color: $c-light;
+		background-color: $c-dark;
 		background-size: cover;
 		background-attachment: fixed;
 		background-position: 50%;
-		color: $c-light;
-		background-color: $c-dark;
-		height: 100vh;
-		position: fixed;
 		background-image: $i-main-bg;
-		z-index: 3;		
+		z-index: 3;
 				
 		.header {
 			font-size: 0.85rem;
 			width: 100%;
 			background-image: none;
 			opacity: 0;
+			
 
 			&:before {
 				content: "";
@@ -158,6 +159,28 @@
 				}
 			}
 		}
+
+		@media (max-width: $screen-md - 1px) {
+			height: 40px;
+			background-color: $c-dark;
+			background-image: none;
+
+			&__burger {
+				position: relative;
+				display: inline-block;
+				color: $c-white;
+			}
+
+			&__container {
+				position: fixed;
+				height: 100vh;
+				width: 100%;
+				&:not(.menu-shown) {
+					display: none;
+				}
+				
+			}
+		} 
 	}
 
 
@@ -187,6 +210,12 @@
 			background-color: $c-dark-bg;			
 			> div {
 				max-width: $max-width - $gutter * 2;
+			}
+		}
+
+		@media (max-width: $screen-md - 1px) {
+			&__header {
+				padding-top: 40px;
 			}
 		}
 	}
