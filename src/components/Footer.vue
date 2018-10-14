@@ -7,9 +7,7 @@
 					Северный (Арктический) Федеральный Университет имени М.В. Ломоносова
 				</a>
 			</div>
-			<div>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita maiores corporis doloremque maxime recusandae optio nulla eveniet rem perferendis. Deserunt consequuntur voluptas error ut nesciunt quibusdam illum optio aliquid vel!
-			</div>
+			<div v-html="this.text"></div>
 		</div>
 	</footer>
 </template>
@@ -20,7 +18,7 @@
 
 	@Component
 	export default class Footer extends Vue {
-		@Prop() private informationItem!: GridListObject;
+		@Prop() private text!: string;
 
 		public mounted() {
 			if (this.$el.classList.contains('main-block__footer')) {

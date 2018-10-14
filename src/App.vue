@@ -19,7 +19,7 @@
 				<Header class="row main-block__header" :msg="getInfo.dates"/>
 				<router-view class="main-block__content"
 				:style="`min-height: calc(100vh - ${getDimentions.header}px - ${getDimentions.footer}px)`"/>
-				<Footer class="row main-block__footer" />
+				<Footer class="row main-block__footer" :text="getInfo.footer" />
 			</main>
 		</div>
 	</div>

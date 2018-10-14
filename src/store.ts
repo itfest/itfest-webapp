@@ -15,6 +15,7 @@ export default new Vuex.Store({
 			isRegistraionActive: true,
 			dates: '15-17 ДЕКАБРЯ 2018г.',
 			annotation: 'Пожалуйста, подождите',
+			footer: 'Пожалуйста, подождите',
 		},
 		annotationElements: [],
 		informationElements: [],
@@ -62,11 +63,13 @@ export default new Vuex.Store({
 			if (value === false || value === null) {
 				state.generalInfo.isApiResponding = state.generalInfo.isRegistraionActive = false;
 				state.generalInfo.annotation = 'Ресурс недоступен, пожалуйста зайдите позднее или попробуйте обновить страницу';
+				state.generalInfo.footer = 'Ресурс недоступен, пожалуйста зайдите позднее или попробуйте обновить страницу';
 			} else {
 				state.generalInfo.isApiResponding = true;
 				state.generalInfo.isRegistraionActive = value.is_registration_active;
 				state.generalInfo.dates = value.dates;
 				state.generalInfo.annotation = value.annotation;
+				state.generalInfo.footer = value.footer;
 			}
 		},
 	},
