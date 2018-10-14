@@ -4,10 +4,9 @@ import axios from 'axios';
 
 import GridListObject from '@/classes/GridListObject.ts';
 import Partner from '@/classes/Partner.ts';
+import { apiHost } from '@/config';
 
 Vue.use(Vuex);
-
-const urlBase = 'http://localhost:3000';
 
 export default new Vuex.Store({
 	state: {
@@ -38,7 +37,7 @@ export default new Vuex.Store({
 		},
 		getPartners(state: any) {
 			return state.partners.map((e: any) => {
-				return new Partner( e.id, e.name, e.link, `${urlBase}${e.logo.url}`, e.created_at, e.updated_at);
+				return new Partner( e.id, e.name, e.link, `${apiHost}/${e.logo.url}`, e.created_at, e.updated_at);
 			});
 		},
 		getDimentions(state: any) {
@@ -70,7 +69,7 @@ export default new Vuex.Store({
 	actions: {
 		getAnnotationElementsFromApi({commit}) {
 			axios
-				.get(`${urlBase}/annotations`)
+				.get(`${apiHost}/annotations`)
 				.then((resp: any) => {
 					commit('set', { type: 'annotationElements', items: resp.data });
 				}, () => {
@@ -80,7 +79,7 @@ export default new Vuex.Store({
 		},
 		getInformationElementsFromApi({commit}) {
 			axios
-				.get(`${urlBase}/information_elements`)
+				.get(`${apiHost}/information_elements`)
 				.then((resp: any) => {
 					commit('set', { type: 'informationElements', items: resp.data });
 				}, () => {
@@ -90,7 +89,7 @@ export default new Vuex.Store({
 		},
 		getPartnersFromApi({commit}) {
 			axios
-				.get(`${urlBase}/partners`)
+				.get(`${apiHost}/partners`)
 				.then((resp: any) => {
 					commit('set', { type: 'partners', items: resp.data });
 				}, () => {
@@ -100,7 +99,7 @@ export default new Vuex.Store({
 		},
 		getInfoFromApi({commit}) {
 			axios
-				.get(`${urlBase}/general/info`)
+				.get(`${apiHost}/general/info`)
 				.then((resp: any) => {
 					commit('setGeneralInfo', resp.data);
 				}, () => {
