@@ -2,7 +2,7 @@
 	<div id="app" class="container-fluid">
 		<div class="row">
 			<aside class="sidebar row-xs col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
-				<button class="sidebar__burger" @click="menuToggle">&#9776;</button>
+				<button class="sidebar__burger" @click="menuToggle"><img src="/img/burger.svg"></button>
 				<div class="sidebar__container" :class="{'menu-shown': this.menuShown}">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
@@ -174,12 +174,18 @@
 			&__burger {
 				display: inline-block;
 				position: relative;
-				padding-top: 10px;
+				padding: 8px 0;
 				font-size: 1.8rem;
 				color: $c-white;
 				background-color: transparent;
 				border: none;
 				outline: none;
+				max-height:100%;
+
+				img {
+					max-height: 25px;
+				}
+
 				&:hover, &active, &focus {
 					outline: none;
 				}
