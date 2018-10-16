@@ -2,7 +2,7 @@
 	<div id="app" class="container-fluid">
 		<div class="row">
 			<aside class="sidebar row-xs col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
-				<button class="sidebar__burger" @click="menuToggle">МЕНЮ</button>
+				<button class="sidebar__burger" @click="menuToggle">&#9776;</button>
 				<div class="sidebar__container" :class="{'menu-shown': this.menuShown}">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">
@@ -167,14 +167,22 @@
 		}
 
 		@media (max-width: $screen-md - 1px) {
-			height: 40px;
+			height: 50px;
 			background-color: $c-dark;
 			background-image: none;
 
 			&__burger {
-				position: relative;
 				display: inline-block;
+				position: relative;
+				padding-top: 10px;
+				font-size: 1.8rem;
 				color: $c-white;
+				background-color: transparent;
+				border: none;
+				outline: none;
+				&:hover, &active, &focus {
+					outline: none;
+				}
 			}
 
 			&__container {
@@ -184,7 +192,14 @@
 				&:not(.menu-shown) {
 					display: none;
 				}
-				
+			}
+
+			.header {
+				display: none;
+			}
+
+			.menu-container {
+				padding-top: 30px;
 			}
 		} 
 	}
