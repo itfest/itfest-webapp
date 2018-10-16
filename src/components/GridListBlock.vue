@@ -85,10 +85,21 @@
 				padding-top: $gutter;
 			}
 
-			span {
-				display: block;
+			> span {
+				display: grid;
 				position: relative;
 				z-index: 2;
+
+				> a {
+					padding: 2px 6px;
+					justify-self: end;
+					text-decoration: none;
+					border-bottom: 2px dotted $c-white-transparent-4;
+
+					&:hover {
+						border-bottom: 2px solid $c-white-transparent-6;
+					}
+				}
 			}
 
 			&:not(&--no-text) h2 {

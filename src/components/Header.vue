@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="header__content">
 			<div class="header__frame">
-				<h1>IT-Архангельск</h1>
+				<h1><router-link to="/">IT-Архангельск</router-link></h1>
 				<span>{{ msg }}</span>
 			</div>
 		</div>
@@ -78,6 +78,10 @@ export default class Header extends Vue {
 			position: relative;
 			margin: 18px 0;
 			padding: 0 0 20px;
+
+			a {
+				color: $c-white;
+			}
 			
 			&:after {
 				content: "";
