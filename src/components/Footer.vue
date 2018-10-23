@@ -21,6 +21,11 @@
 		@Prop() private text!: string;
 
 		public mounted() {
+			window.addEventListener('resize', this.commitSize);
+			this.commitSize();
+		}
+
+		private commitSize() {
 			if (this.$el.classList.contains('main-block__footer')) {
 				this.$store.commit('setDimention', {element: 'footer', value: this.$el.offsetHeight });
 			}
