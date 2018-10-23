@@ -21,15 +21,11 @@
 		@Prop() private activityItem!: GridListObject;
 
 		public isWithoutText() {
-			return (
-				this.activityItem.text == null ||
-				this.activityItem.text == ''
-			) && (
-				this.activityItem.linkText == null ||
-				this.activityItem.linkText == '' ||
-				this.activityItem.linkUri == null ||
-				this.activityItem.linkUri == ''
-			);
+			return 
+				!!this.activityItem.text && (
+					!!this.activityItem.linkText ||
+					!!this.activityItem.linkUri
+				);
 		}
 	}
 </script>

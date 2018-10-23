@@ -1,8 +1,8 @@
 <template>
 	<div class="information__item">
 		<h2>{{ informationItem.heading }}</h2>
-		<p> {{ informationItem.text }}</p>
-		<a :href=informationItem.linkUri>
+		<p>{{ informationItem.text }}</p>
+		<a v-if="!!informationItem.linkText" :href=informationItem.linkUri>
 			{{ informationItem.linkText }}
 		</a>
 	</div>

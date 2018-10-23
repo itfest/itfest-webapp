@@ -180,6 +180,7 @@
 
 			> p {
 				padding: 10px 0;
+				line-height: initial;
 			}
 
 			> a {
