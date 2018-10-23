@@ -9,7 +9,7 @@
 						<nav id="nav" class="menu">
 							<router-link v-on:click.native="menuClose()" to="/">Главная</router-link>
 							<router-link v-on:click.native="menuClose()" v-show="getInfo.isRegistraionActive" to="/register">Регистрация</router-link>
-							<router-link v-for="page in getPageListFromApi" :key="page.id" v-on:click.native="menuClose()" :to="`page/${page.id}`">{{page.title}}</router-link>
+							<router-link v-for="page in getPageListFromApi" :key="page.id" v-on:click.native="menuClose()" :to="`/page/${page.id}`">{{page.title}}</router-link>
 						</nav>
 					</div>
 				</div>
