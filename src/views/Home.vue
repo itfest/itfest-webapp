@@ -11,7 +11,6 @@
 
 <script lang="ts">
 	import { Component, Vue } from 'vue-property-decorator';
-	import HelloWorld from '@/components/HelloWorld.vue';
 	import Annotation from '@/components/Annotation.vue';
 	import BigLink from '@/components/BigLink.vue';
 	import GridListBlock from '@/components/GridListBlock.vue';
@@ -20,7 +19,6 @@
 
 	@Component({
 		components: {
-			HelloWorld,
 			Annotation,
 			BigLink,
 			GridListBlock,
