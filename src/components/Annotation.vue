@@ -64,5 +64,10 @@
 				left: 100%;
 			}
 		}
+
+		@media (max-width: 539px) {
+			padding: 20px 20px 5px;
+			font-size: 16px;
+		}
 	}
 </style>
