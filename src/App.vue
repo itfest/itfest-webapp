@@ -60,6 +60,7 @@
 		public mounted() {
 			window.addEventListener('scroll', this.handleScroll);
 			this.$store.dispatch('getInfoFromApi');
+			this.$store.dispatch('getEventListFromApi');
 			this.$store.dispatch('getPageListFromApi');
 		}
 

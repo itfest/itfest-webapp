@@ -18,6 +18,11 @@ export default new Router({
 			component: () => import('./views/Register.vue'),
 		},
 		{
+			path: '/register/event/:id',
+			name: 'registerEvent',
+			component: () => import('./views/RegisterEventForm.vue'),
+		},
+		{
 			path: '/page/:id',
 			name: 'page',
 			component: () => import('./views/Page.vue'),

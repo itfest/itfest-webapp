@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import GridListObject from '@/classes/GridListObject.ts';
 import Partner from '@/classes/Partner.ts';
+import FestEvent from '@/classes/FestEvent.ts';
 import { apiHost } from '@/config';
 
 Vue.use(Vuex);
@@ -21,6 +22,7 @@ export default new Vuex.Store({
 		informationElements: [],
 		partners: [],
 		pages: [],
+		events: [],
 		dimentions: {
 			header: 293,
 			footer: 228,
@@ -47,6 +49,20 @@ export default new Vuex.Store({
 		},
 		getInfo(state: any) {
 			return state.generalInfo;
+		},
+		getEvents(state: any) {
+			return state.events.map((e: any) => {
+				return new FestEvent(
+					e.id,
+					e.title,
+					e.description,
+					e.has_coach,
+					e.has_question,
+					e.is_online_participation_available,
+					e.team_limit,
+					e.question_list,
+				);
+			});
 		},
 		getPageList(state: any) {
 			return state.pages;
@@ -120,6 +136,17 @@ export default new Vuex.Store({
 					commit('set', { type: 'pages', items: resp.data });
 				}, () => {
 					commit('set', { type: 'pages', items: [] });
+
+					commit('set', false);
+				});
+		},
+		getEventListFromApi({commit}) {
+			axios
+				.get(`${apiHost}/events`)
+				.then((resp: any) => {
+					commit('set', { type: 'events', items: resp.data });
+				}, () => {
+					commit('set', { type: 'events', items: [] });
 
 					commit('set', false);
 				});

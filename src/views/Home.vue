@@ -33,7 +33,6 @@
 			this.$store.dispatch('getAnnotationElementsFromApi');
 			this.$store.dispatch('getInformationElementsFromApi');
 			this.$store.dispatch('getPartnersFromApi');
-			this.$store.dispatch('getInfoFromApi');
 		}
 
 		get getAnnotationElements() {
