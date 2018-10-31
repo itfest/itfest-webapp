@@ -82,7 +82,7 @@
 				<h3>Сведения об участниках</h3>
 				<div class="form-row my-3 row-lg">
 					<label class="col-form-label col-md-6 col-lg-4" for="participants__amount">Количество участников</label>
-					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" v-model="teamMembersCount" min="1" max="3" type="number">
+					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" v-model="teamMembersCount" min="1" :max="eventInfo.teamLimit" type="number">
 				</div>
 				<div v-for="n in parseInt(teamMembersCount)" class="participants__block pt-3">
 					<h5>Участник {{n}}</h5>
