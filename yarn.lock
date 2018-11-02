@@ -6603,6 +6603,10 @@ vue-loader@^15.4.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-modal-dialogs@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/vue-modal-dialogs/-/vue-modal-dialogs-3.0.0.tgz#df92dc2d8d3b3104ed54d5f814f6881b87d58eb8"
+
 vue-property-decorator@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-7.0.0.tgz#46f53dd741eb86c3af091bb0492400c450eebf19"

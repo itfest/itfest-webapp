@@ -22,6 +22,7 @@
 				<Footer class="row main-block__footer" :text="getInfo.footer" />
 			</main>
 		</div>
+		<dialogs-wrapper></dialogs-wrapper>
 	</div>
 </template>
 

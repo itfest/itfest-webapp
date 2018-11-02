@@ -41,7 +41,7 @@
 
 				<div class="form-check mt-4">
 					<input class=" form-check-input" type="checkbox" v-model="hasMentor" @change.lazy="clearMentor" id="contest-work__has-mentor">
-					<label class="form-check-label" for="contest-work__has-mentor">Указать руководителя(препдавателя)</label>
+					<label class="form-check-label" for="contest-work__has-mentor">Указать руководителя (преподавателя)</label>
 				</div>
 			</div>
 
@@ -56,7 +56,7 @@
 			<div class="form-block participants">
 				<div class="form-row my-3 row-lg">
 					<label class="col-form-label col-md-6 col-lg-4" for="participants__amount">Количество авторов</label>
-					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" min="1" max="6" type="number" @change.lazy="clearTeamName" v-model="contestWorkMembersCount">
+					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" min="1" max="3" type="number" @change.lazy="clearTeamName" v-model="contestWorkMembersCount">
 				</div>
 
 				<div class="form-row my-1" v-if="parseInt(contestWorkMembersCount) > 1">
@@ -132,8 +132,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import Modal from '@/components/Modal.vue';
 import axios from 'axios';
 import { apiHost } from '@/config';
+import { create } from 'vue-modal-dialogs';
+
 
 @Component
 export default class RegisterContestForm extends Vue {
@@ -173,7 +176,6 @@ export default class RegisterContestForm extends Vue {
 		event.preventDefault();
 		if (event.srcElement.checkValidity()) {
 			const formData = this.contestWorkObject;
-
 			formData.contest_work_members_attributes = formData.contest_work_members_attributes
 				.splice(0, parseInt(this.contestWorkMembersCount, 10));
 
@@ -185,13 +187,16 @@ export default class RegisterContestForm extends Vue {
 		return this.$store.getters.getContestNominations;
 	}
 
-	private sendData(formData: object) {
+	private sendData(formData: {}) {
+		const hack = JSON.parse(JSON.stringify(formData));
+		Object.keys(hack).forEach( (k: any) => (!hack[k] && hack[k] !== undefined) && delete hack[k]);
+
 		axios
 			.post(`${apiHost}/contest_nominations/${this.nominationId}/contest_works`, formData)
 			.then((resp: any) => {
-				console.log(resp);
+				this.$router.replace('/register/finished');
 			}, (resp: any) => {
-				console.log(resp);
+				alert('Ошибка, проверьте правильность ввода');
 			});
 	}
 }

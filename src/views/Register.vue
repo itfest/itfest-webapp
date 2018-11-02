@@ -4,16 +4,17 @@
 		<p v-if="!getInfo.isRegistraionActive">
 			Регистрация временно недоступна.
 		</p>
-		<div v-if="getInfo.isRegistraionActive">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae repudiandae vero nesciunt excepturi laudantium unde fuga eum alias magni?</p>
-
+		<div v-if="getInfo.isRegistraionActive ">
 			<h3>Конкурс компьютерных работ</h3>
-			<p>Velit consequatur quo tempore, necessitatibus ullam minima eius rerum dolore.</p>
+			
+			До участия допускаются учащиеся российских и зарубежных учреждений среднего общего образования, начального и среднего профессионального образования, высших учебных заведений в возрасте от 14 до 25 лет. Конкурс проводится по определенному списку номинаций. Принять участие могут как индивидуальные участники, так и авторские коллективы размером до трех человек.
+
 			<div class="reg-link">
 				<router-link to="register/contest-work">Перейти к регистрации конкурсной работы</router-link>
-				<a href="#">Перейти к регистрации конкурсной работы</a>
 			</div>
-			<RegisterEventBlock v-for="event in getEvents" :key="event.id" :event="event" />
+			<div v-if="false">
+				<RegisterEventBlock v-for="event in getEvents" :key="event.id" :event="event" />
+			</div>
 
 		</div>
 	</div>

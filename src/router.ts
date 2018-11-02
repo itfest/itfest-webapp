@@ -23,6 +23,11 @@ export default new Router({
 			component: () => import('./views/RegisterContestForm.vue'),
 		},
 		{
+			path: '/register/finished',
+			name: 'registerFinish',
+			component: () => import('./views/RegFinish.vue'),
+		},
+		{
 			path: '/register/event/:id',
 			name: 'registerEvent',
 			component: () => import('./views/RegisterEventForm.vue'),
