@@ -2,91 +2,129 @@
 	<div class="register-form-page">
 		<h1>{{this.eventInfo.title}}</h1>
 		<p v-html="this.eventInfo.description"></p>
-		<form>
+		<form class="reg-form" @submit="submitForm">
 			<div class="form-block contest-work" id="contest-work">
-				<h3>Сведения о конкурсной работе</h3>
-				<div class="form-row my-1 row-sm">
-					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__title">Название работы</label>
-					<input class="col-md-6 col-lg-8 form-control" id="contest-work__title" name="title" type="text">
+				<h3 class="mb-4">Сведения о конкурсной работе</h3>
+				<div class="form-row my-1">
+					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__title">Номинация</label>
+					<select required v-model="nominationId" class="col-md-6 col-lg-8 form-control">
+						<option value="" selected disabled hidden>-- Выберите номинацию --</option>
+						<option v-for="nomination in getContestNominations"
+							    :key="nomination.id"
+							    :value="nomination.id">{{nomination.caption}}</option>
+					</select>
+				</div>
+				<div class="form-row my-1">
+					<label class="col-form-label col-md-6 col-lg-4"  for="contest-work__title">Название работы</label>
+					<input class="col-md-6 col-lg-8 form-control" id="contest-work__title" name="title" type="text" v-model="contestWorkObject.work_title" required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,48}$">
 				</div>
 
-				<div class="form-row my-1 row-sm">
+				<div class="form-row my-1">
+					<label class="col-form-label col-md-6 col-lg-4"  for="contest-work__link">Ссылка на скачивание работы</label>
+					<input required pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" class="col-md-6 col-lg-8 form-control" id="contest-work__link" name="title" type="text" v-model="contestWorkObject.ref_to_work">
+				</div>
+
+				<div class="form-row mb-2">
+					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__how-software">Использованное ПО</label>
+					<textarea pattern="^[a-zA-Zа-яА-Я ,.'-]+$" class="col-md-6 col-lg-8 form-control" id="contest-work__how-software" v-model="contestWorkObject.software"></textarea>
+				</div>
+
+				<div class="form-row my-3">
 					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__how-learned-about">Расскажите, как вы узнали о фестивале</label>
-					<textarea class="col-md-6 col-lg-8 form-control" id="contest-work__how-learned-about"></textarea>
+					<textarea class="col-md-6 col-lg-8 form-control" id="contest-work__how-learned-about" v-model="contestWorkObject.how_learned_about"></textarea>
 				</div>
 
-				<div class="form-check">
-					<input class=" form-check-input" type="checkbox" v-model="hasMentor" id="contest-work__has-mentor">
+				<div class="form-row my-3">
+					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__note">Сопроводительная записка</label>
+					<textarea class="col-md-6 col-lg-8 form-control" id="contest-work__note" v-model="contestWorkObject.notes"></textarea>
+				</div>
+
+				<div class="form-check mt-4">
+					<input class=" form-check-input" type="checkbox" v-model="hasMentor" @change.lazy="clearMentor" id="contest-work__has-mentor">
 					<label class="form-check-label" for="contest-work__has-mentor">Указать руководителя(препдавателя)</label>
 				</div>
 			</div>
 
 			<div class="form-block mentor" v-if="hasMentor" id="mentor">
-				<h3>Сведения о руководителе работы</h3>
-				<div class="form-row my-1 row-sm">
+				<h3 class="mb-4">Сведения о руководителе работы</h3>
+				<div class="form-row my-1">
 					<label class="col-form-label col-md-6 col-lg-4" for="mentor__first-name">ФИО руководителя</label>
-					<input class="col-md-6 col-lg-8 form-control" id="mentor__first-name" type="text">
+					<input class="col-md-6 col-lg-8 form-control" id="mentor__name" type="text" pattern="^[a-zA-Zа-яА-Я ,.'-]{2,48}$" v-model="contestWorkObject.mentor">
 				</div>
 			</div>
 
 			<div class="form-block participants">
-				<h3 v-if="teamMembersCount > 1">Сведения об авторах работы</h3>
-				<h3 v-if="!(teamMembersCount > 1)">Сведения об авторе работы</h3>
-				<h3>Сведения об авторах работы</h3>
 				<div class="form-row my-3 row-lg">
 					<label class="col-form-label col-md-6 col-lg-4" for="participants__amount">Количество авторов</label>
-					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" v-model="teamMembersCount" min="1" :max="eventInfo.teamLimit" type="number">
+					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" min="1" max="6" type="number" @change.lazy="clearTeamName" v-model="contestWorkMembersCount">
 				</div>
-				<div v-for="n in parseInt(teamMembersCount)" class="participants__block pt-3">
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__first-name">Имя</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__first-name" type="text">
+
+				<div class="form-row my-1" v-if="parseInt(contestWorkMembersCount) > 1">
+					<label class="col-form-label col-md-6 col-lg-4" for="mentor__first-name">Название творческого объединения</label>
+					<input class="col-md-6 col-lg-8 form-control" required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,48}$" id="participants__team_name" type="text" v-model="contestWorkObject.team_name">
+				</div>
+				
+				<h3 v-if="parseInt(contestWorkMembersCount) > 1">Сведения об авторах работы</h3>
+				<h3 v-if="!(parseInt(contestWorkMembersCount) > 1)">Сведения об авторе работы</h3>
+				<div v-for="n in parseInt(contestWorkMembersCount)" class="participants__block pt-3">
+					<h4 v-if="contestWorkMembersCount > 1">{{n}}-й автор</h4>
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__first_name${n}`">Имя</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__first_name${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['first_name']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__last-name">Фамилия</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__last-name" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__last_name${n}`">Фамилия</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__last_name${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['last_name']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__patronymic">Отчество</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__patronymic" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__patronymic${n}`">Отчество</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__patronymic${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['patronymic']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__university">Университет (Школа)</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__university" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__birthdate${n}`">Дата рождения</label>
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__birthdate${n}`" type="date" v-model="contestWorkObject.contest_work_members_attributes[n-1]['birthdate']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__speciality">Специальность</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__speciality" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__university${n}`">Университет (Школа)</label>
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__university${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['university']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__year-of-study">Год обучения</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__year-of-study" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__speciality${n}`">Специальность</label>
+						<input pattern="^[a-zA-Zа-яА-Я ,.'-]+$" class="col-md-6 col-lg-8 form-control" :id="`participants__speciality${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['speciality']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__group">Группа</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__group" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__group${n}`">Группа (Класс)</label>
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__group${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['group']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__address">Адрес</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__address" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__year_of_study${n}`">Год обучения</label>
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__year_of_study${n}`" type="number" min="1" max="11" v-model="contestWorkObject.contest_work_members_attributes[n-1]['year_of_study']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__birthdate">Дата рождения</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__birthdate" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__address${n}`">Адрес</label>
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__address${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['address']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__email">E-mail</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__email" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__email${n}`">E-mail</label>
+						<input required pattern="\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z" class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__phone">Номер телефона</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__phone" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__phone${n}`">Номер телефона</label>
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__phone${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['phone']">
 					</div>
-					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__soc-media">Профиль в социальной сети</label>
-						<input class="col-md-6 col-lg-8 form-control" id="participants__soc-media" type="text">
+					<div class="form-row my-1">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__soc_media${n}`">Аккаунт в соц. сети</label>
+						<input class="col-md-6 col-lg-8 form-control" :id="`participants__soc_media${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['soc_media']">
+					</div>
+					<div class="form-check mt-4">
+						<input class="form-check-input" type="checkbox" :id="`participants__show_email${n}`" v-model="contestWorkObject.contest_work_members_attributes[n-1]['show_email']">
+						<label class="form-check-label" :for="`participants__show_email${n}`">В случае, если моя работа будет представлена на презентационном диске Фестиваля  указать мой e-mail</label>
 					</div>
 				</div>
+			</div>
+
+			<div class="reg-form--btn-container mt-5">
+				<input type="submit" value="Отправить" class="reg-form--btn">
 			</div>
 		</form>
 	</div>
@@ -101,17 +139,60 @@ import { apiHost } from '@/config';
 export default class RegisterContestForm extends Vue {
 
 	public eventInfo = '';
-	public hasCoach = false;
-	public contest-workMembersCount = 1;
-	public formData = {
+	public hasMentor = false;
+	public contestWorkMembersCount = '1';
+	public nominationId = null;
 
+	public contestWorkObject = {
+		work_title: null,
+		mentor: null,
+		software: null,
+		how_learned_about: null,
+		notes: null,
+		team_name: null,
+		contest_work_members_attributes: [{}, {}, {}, {}, {}, {}],
 	};
 
 	constructor() {
 		super();
 	}
 
-	public mounted() {
+	public clearMentor() {
+		if (!this.hasMentor) {
+			this.contestWorkObject.mentor = null;
+		}
+	}
+
+	public clearTeamName() {
+		if (parseInt(this.contestWorkMembersCount, 10) === 1) {
+			this.contestWorkObject.team_name = null;
+		}
+	}
+
+	public submitForm(event: any) {
+		event.preventDefault();
+		if (event.srcElement.checkValidity()) {
+			const formData = this.contestWorkObject;
+
+			formData.contest_work_members_attributes = formData.contest_work_members_attributes
+				.splice(0, parseInt(this.contestWorkMembersCount, 10));
+
+			this.sendData(formData);
+		}
+	}
+
+	get getContestNominations() {
+		return this.$store.getters.getContestNominations;
+	}
+
+	private sendData(formData: object) {
+		axios
+			.post(`${apiHost}/contest_nominations/${this.nominationId}/contest_works`, formData)
+			.then((resp: any) => {
+				console.log(resp);
+			}, (resp: any) => {
+				console.log(resp);
+			});
 	}
 }
 </script>

@@ -9,7 +9,8 @@
 
 			<h3>Конкурс компьютерных работ</h3>
 			<p>Velit consequatur quo tempore, necessitatibus ullam minima eius rerum dolore.</p>
-			<div class="reg-link">				
+			<div class="reg-link">
+				<router-link to="register/contest-work">Перейти к регистрации конкурсной работы</router-link>
 				<a href="#">Перейти к регистрации конкурсной работы</a>
 			</div>
 			<RegisterEventBlock v-for="event in getEvents" :key="event.id" :event="event" />

@@ -5,6 +5,7 @@ import axios from 'axios';
 import GridListObject from '@/classes/GridListObject.ts';
 import Partner from '@/classes/Partner.ts';
 import FestEvent from '@/classes/FestEvent.ts';
+import ContestNomination from '@/classes/ContestNomination.ts';
 import { apiHost } from '@/config';
 
 Vue.use(Vuex);
@@ -23,6 +24,7 @@ export default new Vuex.Store({
 		partners: [],
 		pages: [],
 		events: [],
+		contestNominations: [],
 		dimentions: {
 			header: 293,
 			footer: 228,
@@ -61,6 +63,16 @@ export default new Vuex.Store({
 					e.is_online_participation_available,
 					e.team_limit,
 					e.question_list,
+				);
+			});
+		},
+		getContestNominations(state: any) {
+			return state.contestNominations.map((e: any) => {
+				return new ContestNomination(
+					e.id,
+					e.caption,
+					e.availible_for_registration,
+					e.description,
 				);
 			});
 		},
@@ -147,6 +159,17 @@ export default new Vuex.Store({
 					commit('set', { type: 'events', items: resp.data });
 				}, () => {
 					commit('set', { type: 'events', items: [] });
+
+					commit('set', false);
+				});
+		},
+		getContestNominationsFromApi({commit}) {
+			axios
+				.get(`${apiHost}/contest_nominations`)
+				.then((resp: any) => {
+					commit('set', { type: 'contestNominations', items: resp.data });
+				}, () => {
+					commit('set', { type: 'contestNominations', items: [] });
 
 					commit('set', false);
 				});
