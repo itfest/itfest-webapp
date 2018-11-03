@@ -56,7 +56,7 @@
 			<div class="form-block participants">
 				<div class="form-row my-3 row-lg">
 					<label class="col-form-label col-md-6 col-lg-4" for="participants__amount">Количество авторов</label>
-					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" min="1" max="3" type="number" @change.lazy="clearTeamName" v-model="contestWorkMembersCount">
+					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" min="1" max="3" type="number" maxlength="1" @change.lazy="clearTeamName" v-model="contestWorkMembersCount">
 				</div>
 
 				<div class="form-row my-1" v-if="parseInt(contestWorkMembersCount) > 1">
@@ -66,7 +66,7 @@
 				
 				<h3 v-if="parseInt(contestWorkMembersCount) > 1">Сведения об авторах работы</h3>
 				<h3 v-if="!(parseInt(contestWorkMembersCount) > 1)">Сведения об авторе работы</h3>
-				<div v-for="n in parseInt(contestWorkMembersCount)" class="participants__block pt-3">
+				<div v-if="contestWorkMembersCount < 6 && contestWorkMembersCount > 0" v-for="n in parseInt(contestWorkMembersCount)" class="participants__block pt-3">
 					<h4 v-if="contestWorkMembersCount > 1">{{n}}-й автор</h4>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__first_name${n}`">Имя</label>
@@ -98,7 +98,7 @@
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__year_of_study${n}`">Год обучения</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__year_of_study${n}`" type="number" min="1" max="11" v-model="contestWorkObject.contest_work_members_attributes[n-1]['year_of_study']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__year_of_study${n}`" type="number" min="1" max="11" minlength="1" maxlength="2" v-model="contestWorkObject.contest_work_members_attributes[n-1]['year_of_study']">
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__address${n}`">Адрес</label>
@@ -106,7 +106,7 @@
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__email${n}`">E-mail</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="email" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="email" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__phone${n}`">Номер телефона</label>
@@ -172,8 +172,14 @@ export default class RegisterContestForm extends Vue {
 	}
 
 	public clearTeamName() {
-		if (parseInt(this.contestWorkMembersCount, 10) === 1) {
+		const mmbrsCount = parseInt(this.contestWorkMembersCount, 10);
+
+		if (mmbrsCount === 1) {
 			this.contestWorkObject.team_name = null;
+		} else if (mmbrsCount > 3) {
+			this.contestWorkMembersCount = '3';
+		} else if (mmbrsCount < 1) {
+			this.contestWorkMembersCount = '1';
 		}
 	}
 

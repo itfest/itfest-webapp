@@ -81,7 +81,7 @@
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__email">E-mail</label>
-					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.email" id="coach__email" ttype="email">
+					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.email" id="coach__email" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email">
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__phone">Номер телефона</label>
@@ -94,9 +94,10 @@
 				<h3 v-if="getCurrentEventInfo().teamLimit === 1">Сведения об участнике</h3>
 				<div v-if="getCurrentEventInfo().teamLimit > 2" class="form-row my-3 row-lg">
 					<label class="col-form-label col-md-6 col-lg-4" for="participants__amount">Количество участников</label>
-					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" v-model="teamMembersCount" min="2" :max="getCurrentEventInfo().teamLimit" type="number">
+					<input class="col-form-label col-md-6 col-lg-8 form-control" id="participants__amount" v-model="teamMembersCount" min="2" :max="getCurrentEventInfo().teamLimit" @change.lazy="fixMembers" type="number">
 				</div>
-				<div v-for="n in parseInt(teamMembersCount)" class="participants__block pt-3">
+
+				<div v-if="teamMembersCount < 6 && teamMembersCount > 0" v-for="n in parseInt(teamMembersCount)" class="participants__block pt-3">
 					<h5 v-if="teamMembersCount > 1" >Участник {{n}}</h5>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__first-name">Имя</label>
@@ -136,7 +137,7 @@
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__email">E-mail</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="email" v-model="eventParticipationNote.event_participants_attributes[n-1]['email']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" v-model="eventParticipationNote.event_participants_attributes[n-1]['email']">
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__phone">Номер телефона</label>
@@ -186,6 +187,18 @@ export default class RegisterEventForm extends Vue {
 	public clearCoach() {
 		if (!this.hasCoach) {
 			this.eventParticipationNote.coach_attributes = {};
+		}
+	}
+
+	public fixMembers() {
+		const mmbrsCount = parseInt(this.teamMembersCount, 10);
+
+		if (mmbrsCount === 1) {
+			this.eventParticipationNote.title = null;
+		} else if (mmbrsCount > 3) {
+			this.teamMembersCount = '3';
+		} else if (mmbrsCount < 1) {
+			this.teamMembersCount = '1';
 		}
 	}
 
