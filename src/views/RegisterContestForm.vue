@@ -24,12 +24,12 @@
 
 				<div class="form-row my-1">
 					<label class="col-form-label col-md-6 col-lg-4"  for="contest-work__link">Ссылка на скачивание работы</label>
-					<input required pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" class="col-md-6 col-lg-8 form-control" id="contest-work__link" name="title" type="text" v-model="contestWorkObject.ref_to_work">
+					<input required pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" class="col-md-6 col-lg-8 form-control" id="contest-work__link" placeholder="http://www.example.com/file.zip" name="title" type="text" v-model="contestWorkObject.ref_to_work">
 				</div>
 
 				<div class="form-row mb-2">
 					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__how-software">Использованное ПО</label>
-					<textarea pattern="^[a-zA-Zа-яА-Я ,.'-]+$" class="col-md-6 col-lg-8 form-control" id="contest-work__how-software" v-model="contestWorkObject.software"></textarea>
+					<textarea pattern="^[a-zA-Zа-яА-Я ,.'-]+$" class="col-md-6 col-lg-8 form-control" id="contest-work__how-software" placeholder="Список использованного ПО, укажите версии" v-model="contestWorkObject.software"></textarea>
 				</div>
 
 				<div class="form-row my-3">
@@ -39,7 +39,7 @@
 
 				<div class="form-row my-3">
 					<label class="col-form-label col-md-6 col-lg-4" for="contest-work__note">Сопроводительная записка</label>
-					<textarea class="col-md-6 col-lg-8 form-control" id="contest-work__note" v-model="contestWorkObject.notes"></textarea>
+					<textarea class="col-md-6 col-lg-8 form-control" id="contest-work__note" v-model="contestWorkObject.notes" placeholder="Тема проекта, цель, которую достигали во время реализации проекта"></textarea>
 				</div>
 
 				<div class="form-check mt-4">
@@ -52,7 +52,7 @@
 				<h3 class="mb-4">Сведения о руководителе работы</h3>
 				<div class="form-row my-1">
 					<label class="col-form-label col-md-6 col-lg-4" for="mentor__first-name">ФИО руководителя</label>
-					<input class="col-md-6 col-lg-8 form-control" id="mentor__name" type="text" pattern="^[a-zA-Zа-яА-Я ,.'-]{2,48}$" v-model="contestWorkObject.mentor">
+					<input class="col-md-6 col-lg-8 form-control" id="mentor__name" type="text" pattern="^[a-zA-Zа-яА-Я ,.'-]{2,48}$" placeholder="Иванов Иван Иванович" v-model="contestWorkObject.mentor">
 				</div>
 			</div>
 
@@ -72,16 +72,16 @@
 				<div v-if="contestWorkMembersCount < 6 && contestWorkMembersCount > 0" v-for="n in parseInt(contestWorkMembersCount)" class="participants__block pt-3">
 					<h4 v-if="contestWorkMembersCount > 1">{{n}}-й автор</h4>
 					<div class="form-row my-1">
-						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__first_name${n}`">Имя</label>
-						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__first_name${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['first_name']">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__last_name${n}`">Фамилия</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__last_name${n}`" placeholder="Иванов" type="text"  v-model="contestWorkObject.contest_work_members_attributes[n-1]['last_name']">
 					</div>
 					<div class="form-row my-1">
-						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__last_name${n}`">Фамилия</label>
-						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__last_name${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['last_name']">
+						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__first_name${n}`">Имя</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__first_name${n}`" placeholder="Иван" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['first_name']">
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__patronymic${n}`">Отчество</label>
-						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__patronymic${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['patronymic']">
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__patronymic${n}`" placeholder="Иванович" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['patronymic']">
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__birthdate${n}`">Дата рождения</label>
@@ -107,9 +107,12 @@
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__address${n}`">Адрес</label>
 						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__address${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['address']">
 					</div>
-					<div class="form-row my-1">
+					<div class="form-row mt-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__email${n}`">E-mail</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="email" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="email" placeholder="example@mailserver.com" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
+					</div>
+					<div class="offset-md-5 offset-lg-4 small mb-2 font-italic text-muted">
+						Пожалуйста, введите свой настоящий email, он будет использован для связи с организаторами.
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__phone${n}`">Номер телефона</label>
@@ -117,7 +120,7 @@
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__soc_media${n}`">Аккаунт в соц. сети</label>
-						<input class="col-md-6 col-lg-8 form-control" :id="`participants__soc_media${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['soc_media']">
+						<input class="col-md-6 col-lg-8 form-control" :id="`participants__soc_media${n}`" placeholder="vk.com/it_fest_arh" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['soc_media']">
 					</div>
 					<div class="form-check mt-4 mb-2">
 						<input class="form-check-input" type="checkbox" :id="`participants__show_email${n}`" v-model="contestWorkObject.contest_work_members_attributes[n-1]['show_email']">
@@ -152,7 +155,7 @@ export default class RegisterContestForm extends Vue {
 	public eventInfo = '';
 	public hasMentor = false;
 	public contestWorkMembersCount = '1';
-	public nominationId = null;
+	public nominationId = '';
 
 	public contestWorkObject = {
 		work_title: null,
