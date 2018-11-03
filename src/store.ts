@@ -61,7 +61,7 @@ export default new Vuex.Store({
 					e.has_coach,
 					e.has_question,
 					e.is_online_participation_available,
-					e.team_limit,
+					parseInt(e.team_limit, 10),
 					e.question_list,
 				);
 			});

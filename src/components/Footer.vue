@@ -2,7 +2,7 @@
 	<footer class="global-footer row">
 		<div class="global-footer__content">
 			<div>
-				&copy; ВШ&nbsp;ИТиАС<br />
+				&copy; ВШИТАС<br />
 				<a href="https://narfu.ru">
 					Северный (Арктический) Федеральный Университет имени М.В. Ломоносова
 				</a>

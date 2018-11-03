@@ -106,7 +106,7 @@
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__email${n}`">E-mail</label>
-						<input required pattern="\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z" class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" type="email" v-model="contestWorkObject.contest_work_members_attributes[n-1]['email']">
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__phone${n}`">Номер телефона</label>
@@ -193,9 +193,6 @@ export default class RegisterContestForm extends Vue {
 	}
 
 	private sendData(formData: {}) {
-		const hack = JSON.parse(JSON.stringify(formData));
-		Object.keys(hack).forEach( (k: any) => (!hack[k] && hack[k] !== undefined) && delete hack[k]);
-
 		axios
 			.post(`${apiHost}/contest_nominations/${this.nominationId}/contest_works`, formData)
 			.then((resp: any) => {
@@ -206,39 +203,3 @@ export default class RegisterContestForm extends Vue {
 	}
 }
 </script>
-
-<style lang="scss">
-	@import "@/assets/scss/_vars.scss";
-
-	.form-block {
-		padding: $gutter * 2;
-		background-color: $c-light;
-
-		& + & {
-			position: relative;
-			margin-top: 20px;
-
-			&:before {
-				content: "";
-				display: block;
-				position: absolute;
-				left: 50%;
-				bottom: 100%;
-				margin-left: -4px;
-				width: 8px;
-				height: 20px;
-				background-color: $c-light;
-			}
-		}
-	}
-
-	.participants {
-		&__block {
-			padding: 10px 0;
-
-			& + & {
-				border-top: 2px dotted $c-dark-rgba-faded;
-			}
-		}
-	}
-</style>
