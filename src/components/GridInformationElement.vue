@@ -2,7 +2,7 @@
 	<div class="information__item">
 		<h2>{{ informationItem.heading }}</h2>
 		<p>{{ informationItem.text }}</p>
-		<a v-if="!!informationItem.linkText" :href=informationItem.linkUri>
+		<a v-if="!!informationItem.linkUri" :href=informationItem.linkUri>
 			{{ informationItem.linkText }}
 		</a>
 	</div>
