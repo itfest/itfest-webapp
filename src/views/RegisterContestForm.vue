@@ -14,6 +14,9 @@
 							    :value="nomination.id">{{nomination.caption}}</option>
 					</select>
 				</div>
+
+				<div v-if="nominationId" class="offset-md-6 offset-lg-4 small mt-2 mb-4" v-html="getNominationById(nominationId).description"></div>
+
 				<div class="form-row my-1">
 					<label class="col-form-label col-md-6 col-lg-4"  for="contest-work__title">Название работы</label>
 					<input class="col-md-6 col-lg-8 form-control" id="contest-work__title" name="title" type="text" v-model="contestWorkObject.work_title" required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,48}$">
@@ -169,6 +172,12 @@ export default class RegisterContestForm extends Vue {
 		if (!this.hasMentor) {
 			this.contestWorkObject.mentor = null;
 		}
+	}
+
+	public getNominationById(id: number) {
+		return this.$store.getters.getContestNominations.find((obj: any) => {
+			return obj.id === id;
+		});
 	}
 
 	public clearTeamName() {
