@@ -77,7 +77,7 @@
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__birthdate">Дата рождения</label>
-					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.birthdate" id="coach__birthdate" type="date">
+					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.birthdate" id="coach__birthdate" min="1920-01-01" max="2008-01-01" type="date">
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__email">E-mail</label>
@@ -132,7 +132,7 @@
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__birthdate">Дата рождения</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__birthdate${n}`" type="date" v-model="eventParticipationNote.event_participants_attributes[n-1]['birthdate']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__birthdate${n}`" type="date" min="1950-01-01" max="2008-01-01" v-model="eventParticipationNote.event_participants_attributes[n-1]['birthdate']">
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__email">E-mail</label>

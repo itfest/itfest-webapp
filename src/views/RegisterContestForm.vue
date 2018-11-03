@@ -82,7 +82,7 @@
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__birthdate${n}`">Дата рождения</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__birthdate${n}`" type="date" v-model="contestWorkObject.contest_work_members_attributes[n-1]['birthdate']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__birthdate${n}`" type="date" min="1950-01-01" max="2008-01-01" v-model="contestWorkObject.contest_work_members_attributes[n-1]['birthdate']">
 					</div>
 					<div class="form-row my-1">
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__university${n}`">Университет (Школа)</label>
