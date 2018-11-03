@@ -5,7 +5,7 @@
 		<form class="reg-form" @submit="submitForm">
 			<div class="form-block team" id="team">
 				<h3 v-if="getCurrentEventInfo().teamLimit > 1" >Сведения о команде</h3>
-				<h3 v-if="getCurrentEventInfo().teamLimit == 1">Общие сведения</h3>
+				<h3 v-if="getCurrentEventInfo().teamLimit === 1">Общие сведения</h3>
 				<div class="form-row my-1 row-sm" v-if="getCurrentEventInfo().teamLimit > 1">
 					<label class="col-form-label col-md-6 col-lg-4" for="team__title">Название команды</label>
 					<input class="col-md-6 col-lg-8 form-control" id="team__title" name="title" type="text" v-model="eventParticipationNote.title">
@@ -30,7 +30,7 @@
 
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="team__how-learned-about">Поле для ответов</label>
-						<textarea class="col-md-6 col-lg-8 form-control" id="team__how-learned-about" v-model="eventParticipationNote.answers"></textarea>
+						<textarea required class="col-md-6 col-lg-8 form-control" id="team__how-learned-about" v-model="eventParticipationNote.answers"></textarea>
 					</div>
 				</div>				
 				
@@ -41,23 +41,29 @@
 
 				<div class="form-check mt-3" v-if="getCurrentEventInfo().hasCoach">
 					<input class=" form-check-input" type="checkbox" v-model="hasCoach" id="team__has-coach" @change.lazy="clearCoach">
-					<label class="form-check-label" for="team__has-coach">У команды есть тренер (ментор)</label>
+					<label class="form-check-label" for="team__has-coach">
+							{{
+								(teamMembersCount === '1')
+								? 'У меня есть тренер (ментор)'
+								: 'У команды есть тренер (ментор)'
+							}}
+					</label>
 				</div>
 			</div>
 
 			<div class="form-block coach" v-if="hasCoach" id="coach">
 				<h3>Сведения о тренере</h3>
 				<div class="form-row my-1 row-sm">
-					<label class="col-form-label col-md-6 col-lg-4" for="coach__first-name">Имя</label>
-					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.first_name" id="coach__first-name" type="text">
+					<label class="col-form-label col-md-6 col-lg-4" for="coach__last-name">Фамилия</label>
+					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.last_name" placeholder="Иванов" id="coach__last-name" type="text">
 				</div>
 				<div class="form-row my-1 row-sm">
-					<label class="col-form-label col-md-6 col-lg-4" for="coach__last-name">Фамилия</label>
-					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.last_name" id="coach__last-name" type="text">
+					<label class="col-form-label col-md-6 col-lg-4" for="coach__first-name">Имя</label>
+					<input class="col-md-6 col-lg-8 form-control" placeholder="Иван" v-model="eventParticipationNote.coach_attributes.first_name" id="coach__first-name" type="text">
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__patronymic">Отчество</label>
-					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.patronymic" id="coach__patronymic" type="text">
+					<input class="col-md-6 col-lg-8 form-control" placeholder="Иванович" v-model="eventParticipationNote.coach_attributes.patronymic" id="coach__patronymic" type="text">
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__workplace">Место работы</label>
@@ -81,7 +87,10 @@
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__email">E-mail</label>
-					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.email" id="coach__email" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email">
+					<input class="col-md-6 col-lg-8 form-control" v-model="eventParticipationNote.coach_attributes.email" id="coach__email" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="example@mailserver.com" type="email">
+				</div>
+				<div class="offset-md-5 offset-lg-4 small mb-2 font-italic text-muted">
+					Пожалуйста, введите свой настоящий email, он будет использован для связи с организаторами.
 				</div>
 				<div class="form-row my-1 row-sm">
 					<label class="col-form-label col-md-6 col-lg-4" for="coach__phone">Номер телефона</label>
@@ -100,16 +109,16 @@
 				<div v-if="teamMembersCount < 6 && teamMembersCount > 0" v-for="n in parseInt(teamMembersCount)" class="participants__block pt-3">
 					<h5 v-if="teamMembersCount > 1" >Участник {{n}}</h5>
 					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__first-name">Имя</label>
-						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__first_name${n}`" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['first_name']">
+						<label class="col-form-label col-md-6 col-lg-4" for="participants__last-name">Фамилия</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__last_name${n}`" placeholder="Иванов" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['last_name']">
 					</div>
 					<div class="form-row my-1 row-sm">
-						<label class="col-form-label col-md-6 col-lg-4" for="participants__last-name">Фамилия</label>
-						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__last_name${n}`" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['last_name']">
+						<label class="col-form-label col-md-6 col-lg-4" for="participants__first-name">Имя</label>
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" placeholder="Иван" :id="`participants__first_name${n}`" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['first_name']">
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__patronymic">Отчество</label>
-						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__patronymic${n}`" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['patronymic']">
+						<input required pattern="^[a-zA-Zа-яА-Я ,.'-]{2,16}$" class="col-md-6 col-lg-8 form-control" :id="`participants__patronymic${n}`" placeholder="Иванович" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['patronymic']">
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__university">Университет</label>
@@ -137,8 +146,13 @@
 					</div>
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__email">E-mail</label>
-						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" v-model="eventParticipationNote.event_participants_attributes[n-1]['email']">
+						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__email${n}`" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="example@mailserver.com" type="email" v-model="eventParticipationNote.event_participants_attributes[n-1]['email']">
 					</div>
+
+					<div class="offset-md-5 offset-lg-4 small mb-2 font-italic text-muted">
+						Пожалуйста, введите свой настоящий email, он будет использован для связи с организаторами.
+					</div>
+
 					<div class="form-row my-1 row-sm">
 						<label class="col-form-label col-md-6 col-lg-4" for="participants__phone">Номер телефона</label>
 						<input required class="col-md-6 col-lg-8 form-control" :id="`participants__phone${n}`" type="text" v-model="eventParticipationNote.event_participants_attributes[n-1]['phone']">
