@@ -2,7 +2,7 @@
 	<div id="app" class="container-fluid">
 		<div class="row">
 			<aside class="sidebar row-xs col-md-4" :class="{'sidebar--scrolled': scrollingPosition > 292}">
-				<button class="sidebar__burger" @click="menuToggle"><img src="/img/burger.svg"></button>
+				<button class="sidebar__burger" @click="menuToggle"><img  alt="menu" src="/img/burger.svg"></button>
 				<div class="sidebar__container" :class="{'menu-shown': this.menuShown}">
 					<Header :msg="getInfo.dates"/>
 					<div class="menu-container col-12">

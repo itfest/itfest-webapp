@@ -33,8 +33,12 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import "@/assets/scss/_vars.scss";
+
+	a {
+		color: lightsteelblue;
+	}
 
 	.global-footer {
 		padding: 20px $gutter $gutter;
@@ -49,7 +53,7 @@
 			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 			grid-auto-rows: minmax(120px, auto);
 			grid-gap: $gutter;
-			color: $c-white-transparent-6;
+			color: #afafaf;
 			border: 4px solid $c-white-transparent-2;
 
 			&:after {
