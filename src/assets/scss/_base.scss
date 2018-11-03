@@ -35,12 +35,20 @@ textarea {
 
 .reg-form {
 	&--btn {
-		color: $c-dark;
-		margin: 0 auto;	    
+		margin: 0 auto;
 	    padding: 10px 25px;
+		color: $c-dark;
 	    text-decoration: none;
+		background-color: $c-white;
 	    border: 4px solid $c-dark;
 	    cursor: pointer;
+
+	    &:disabled {
+	    	opacity: .2;
+	    	background-color: $c-dark;
+	    	color: $c-white;
+	    	cursor: default;
+	    }
 
 	    &:hover {
 	    	background-color: $c-dark;

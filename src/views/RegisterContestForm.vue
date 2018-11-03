@@ -116,16 +116,21 @@
 						<label class="col-form-label col-md-6 col-lg-4" :for="`participants__soc_media${n}`">Аккаунт в соц. сети</label>
 						<input class="col-md-6 col-lg-8 form-control" :id="`participants__soc_media${n}`" type="text" v-model="contestWorkObject.contest_work_members_attributes[n-1]['soc_media']">
 					</div>
-					<div class="form-check mt-4">
+					<div class="form-check mt-4 mb-2">
 						<input class="form-check-input" type="checkbox" :id="`participants__show_email${n}`" v-model="contestWorkObject.contest_work_members_attributes[n-1]['show_email']">
 						<label class="form-check-label" :for="`participants__show_email${n}`">В случае, если моя работа будет представлена на презентационном диске Фестиваля  указать мой e-mail</label>
 					</div>
 				</div>
 			</div>
 
+			<div class="sensitive-data-agreement mt-4">
+				Нажимая кнопку «Отправить», я даю свое согласие на обработку моих персональных данных, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных», на условиях и для целей, определенных в <router-link target="_blank" to="/sensitive">Согласии на обработку персональных данных</router-link>.
+			</div>
+
 			<div class="reg-form--btn-container mt-5">
 				<input type="submit" value="Отправить" class="reg-form--btn">
 			</div>
+
 		</form>
 	</div>
 </template>

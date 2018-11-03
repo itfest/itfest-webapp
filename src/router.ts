@@ -18,6 +18,11 @@ export default new Router({
 			component: () => import('./views/Register.vue'),
 		},
 		{
+			path: '/sensitive',
+			name: 'sensitive',
+			component: () => import('./views/SensitiveDataAgreementPage.vue'),
+		},
+		{
 			path: '/register/contest-work',
 			name: 'RegisterContestWork',
 			component: () => import('./views/RegisterContestForm.vue'),
