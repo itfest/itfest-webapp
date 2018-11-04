@@ -1,6 +1,6 @@
 <template>
 	<div class="activities__item"
-		:class="{'activities__item--no-text': (activityItem.text.length > 0 && activityItem.linkUri.length > 0)}"
+		:class="{'activities__item--no-text': (activityItem.text.length === 0 && activityItem.linkUri.length === 0)}"
 	>
 		<span>
 			<h2 >{{ activityItem.heading }}</h2>
