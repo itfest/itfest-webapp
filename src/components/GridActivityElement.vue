@@ -21,7 +21,7 @@
 		@Prop() private activityItem!: GridListObject;
 
 		public isWithoutText() {
-			return !this.activityItem.text && (!this.activityItem.linkText || !this.activityItem.linkUri);
+			return this.activityItem.linkUri.length === 0;
 		}
 	}
 </script>
