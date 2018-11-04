@@ -36,10 +36,6 @@
 <style lang="scss" scoped>
 	@import "@/assets/scss/_vars.scss";
 
-	a {
-		color: lightsteelblue;
-	}
-
 	.global-footer {
 		padding: 20px $gutter $gutter;
 		font-size: 1rem;
