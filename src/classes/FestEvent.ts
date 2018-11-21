@@ -8,5 +8,6 @@ export default class FestEvent {
 		public isOnlineAvaliable: boolean,
 		public teamLimit: number,
 		public questionList: string | null,
+		public register_available: boolean,
 	) {}
 }

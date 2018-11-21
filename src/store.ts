@@ -63,6 +63,7 @@ export default new Vuex.Store({
 					e.is_online_participation_available,
 					parseInt(e.team_limit, 10),
 					e.question_list,
+					e.is_registration_available,
 				);
 			});
 		},
