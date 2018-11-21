@@ -13,7 +13,7 @@
 				<router-link to="register/contest-work">Перейти к регистрации конкурсной работы</router-link>
 			</div>
 			
-			<RegisterEventBlock v-for="event in getEvents" :key="event.id" :event="event" v-if="event.register_available"/>
+			<RegisterEventBlock v-for="event in getEvents" :key="event.id" :event="event" v-if="event.registerAvailable"/>
 		</div>
 	</div>
 </template>
