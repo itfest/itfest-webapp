@@ -23,21 +23,6 @@ export default new Router({
 			component: () => import('./views/SensitiveDataAgreementPage.vue'),
 		},
 		{
-			path: '/register/contest-work',
-			name: 'RegisterContestWork',
-			component: () => import('./views/RegisterContestForm.vue'),
-		},
-		{
-			path: '/register/finished',
-			name: 'registerFinish',
-			component: () => import('./views/RegFinish.vue'),
-		},
-		{
-			path: '/register/event/:id',
-			name: 'registerEvent',
-			component: () => import('./views/RegisterEventForm.vue'),
-		},
-		{
 			path: '/page/:id',
 			name: 'page',
 			component: () => import('./views/Page.vue'),

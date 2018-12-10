@@ -2,7 +2,6 @@
 	<div class="home">
 		<Annotation :text="getInfo.annotation"/>
 		<GridListBlock :activityItems="getAnnotationElements" />
-		<BigLink v-if="getInfo.isRegistraionActive" linkUri="/register" linkText="Перейти к регистрации" />
 		<GridListBlock v-if="getInformationElements.length > 0" :informationItems="getInformationElements" />
 		<h3 class="heading heading--centered" v-if="getPartners.length > 0">Партнеры фестиваля</h3>
 		<GridListBlock v-if="getPartners.length > 0" :partners="getPartners" />
